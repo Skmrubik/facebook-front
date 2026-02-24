@@ -1,0 +1,73 @@
+.inicio-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.inicio-bloque-izq{
+  width: 55%;
+  border-right:  2px #cccccc solid;
+}
+
+.inicio-bloque-der{
+  width: 45%;
+}
+body{
+  margin: 0px;
+}
+
+:root{
+  margin: 0px;
+  padding: 0px;
+}
+
+.imagen-adaptable {
+  max-width: 100%; /* No permite que sea más ancha que su contenedor */
+  height: auto;    /* Mantiene la proporción original (no se estira) */
+  display: block;  /* Elimina el espacio extra debajo de la imagen */
+}
+
+.logo-facebook{
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.container-login{
+  margin-top: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bloque-input{
+  width: 75%;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px solid #cccccc;
+  padding-left: 20px;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.button-entrar{
+  width: 79%;
+  height: 40px;
+  border-radius: 40px;
+  border: 0px solid;
+  color: white;
+  background-color: #1a75ff;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.button-registrarse{
+  width: 79%;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px solid #cccccc;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+}
