@@ -6,6 +6,7 @@
 .inicio-bloque-izq{
   width: 55%;
   border-right:  2px #cccccc solid;
+  height: 100vh;
 }
 
 .inicio-bloque-der{
@@ -24,6 +25,7 @@ body{
   max-width: 100%; /* No permite que sea más ancha que su contenedor */
   height: auto;    /* Mantiene la proporción original (no se estira) */
   display: block;  /* Elimina el espacio extra debajo de la imagen */
+  max-height: 80vh;
 }
 
 .logo-facebook{
@@ -69,5 +71,25 @@ body{
   font-size: 15px;
   font-weight: 600;
   margin-top: 20px;
+  cursor: pointer;
+}
+
+.container-registrarse{
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-atras-registro{
+  font-size: 15px;
+  align-self: flex-start;
+  margin-left: 20px;
+  border: none;
+  background-color: #1a75ff;
+  color: white;
+  height: 30px;
+  border-radius: 30px;
+  width: 70px;
   cursor: pointer;
 }

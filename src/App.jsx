@@ -5,6 +5,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [registrarse, setRegistrarse] = useState(false)
 
   return (
     <>
@@ -16,12 +17,23 @@ function App() {
           <img  src={'/inicioFacebook.png'} class="imagen-adaptable"/>
         </div>  
         <div className='inicio-bloque-der'>
+          {!registrarse?
           <div className='container-login'>
             <input className='bloque-input' placeholder='Nick'></input>
             <input className='bloque-input' placeholder='Contraseña' type='password'></input>
             <button className='button-entrar'>Entrar</button>
+            <button className='button-registrarse' onClick={() => setRegistrarse(true)}>Registrarse</button>
+          </div>
+          :
+          <div className='container-registrarse'>
+            <button className='button-atras-registro' onClick={() => setRegistrarse(false)}>Atras</button>
+            <input className='bloque-input' placeholder='Nombre y Apellidos'></input>
+            <input className='bloque-input' placeholder='Lugar de Nacimiento'></input>
+            <input className='bloque-input' placeholder='Correo'></input>
+            <input className='bloque-input' placeholder='Contraseña' type='password'></input>
             <button className='button-registrarse'>Registrarse</button>
           </div>
+          }
         </div>
       </div>
     </>
