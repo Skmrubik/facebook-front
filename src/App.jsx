@@ -2,11 +2,71 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { registrarUsuario } from './api/usuario'
 
 function App() {
   const [count, setCount] = useState(0)
   const [registrarse, setRegistrarse] = useState(false)
+  const [nombre, setNombre] = useState("")
+  const [lugar, setLugar] = useState("")
+  const [correo, setCorreo] = useState("")
+  const [password, setPassword] = useState("")
+  const [errorNombre, setErrorNombre] = useState("")
+  const [errorLugar, setErrorLugar] = useState("")
+  const [errorCorreo, setErrorCorreo] = useState("")
+  const [errorPassword, setErrorPassword] = useState("")
 
+  const inputNombre =(e) =>{
+    setNombre(e.target.value);
+  }
+
+  const inputLugar = (e) => {
+    setLugar(e.target.value);
+  }
+
+  const inputCorreo = (e) => {
+    setCorreo(e.target.value);
+  }
+
+  const inputPassword = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const clickRegistro = () => {
+    if (nombre=="") {
+      setErrorNombre("Nombre está vacío")
+    } else {
+      setErrorNombre("")
+    }
+    if (lugar=="") {
+      setErrorLugar("Lugar está vacío")
+    } else {
+      setErrorLugar("")
+    }
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (correo=="") {
+      setErrorCorreo("Correo está vacío")
+    } else if (!regex.test(correo)){
+      setErrorCorreo("El formato no es válido")
+    } else {
+      setErrorCorreo("")
+    }
+    if (password=="") {
+      setErrorPassword("Password está vacía")
+    } else {
+      setErrorPassword("")
+    }
+    
+    if (errorNombre=="" && errorCorreo== "" && errorLugar == "" && errorPassword == "") {
+      const usuario = {
+        nombre,
+        lugar,
+        correo,
+        password
+      }
+      registrarUsuario(usuario);
+    }
+  }
   return (
     <>
       <div className='inicio-container'>
@@ -27,11 +87,15 @@ function App() {
           :
           <div className='container-registrarse'>
             <button className='button-atras-registro' onClick={() => setRegistrarse(false)}>Atras</button>
-            <input className='bloque-input' placeholder='Nombre y Apellidos'></input>
-            <input className='bloque-input' placeholder='Lugar de Nacimiento'></input>
-            <input className='bloque-input' placeholder='Correo'></input>
-            <input className='bloque-input' placeholder='Contraseña' type='password'></input>
-            <button className='button-registrarse'>Registrarse</button>
+            <input className='bloque-input' placeholder='Nombre y Apellidos' onChange={inputNombre}></input>
+            <p className='error-registro'>{errorNombre}</p>
+            <input className='bloque-input' placeholder='Lugar de Nacimiento' onChange={inputLugar}></input>
+            <p className='error-registro'>{errorLugar}</p>
+            <input className='bloque-input' placeholder='Correo' onChange={inputCorreo}></input>
+            <p className='error-registro'>{errorCorreo}</p>
+            <input className='bloque-input' placeholder='Contraseña' type='password' onChange={inputPassword}></input>
+            <p className='error-registro'>{errorPassword}</p>
+            <button className='button-registrarse' onClick={clickRegistro}>Registrarse</button>
           </div>
           }
         </div>
