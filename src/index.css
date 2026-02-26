@@ -99,3 +99,15 @@ body{
   color: red;
   font-family: sans-serif;
 }
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px 5px 10px;
+  background-color: #333333;
+}
+
+.icono-casa{
+  color: #a6a6a6;
+}

@@ -19,7 +19,7 @@ function App() {
         {/* Ruta pública: Login */}
         <Route 
           path="/" 
-          element={<Login onLogin={() => setIsAuthenticated(true)} />} 
+          element={<Login onLogin={setIsAuthenticated} />} 
         />
 
         {/* Rutas protegidas*/} 

@@ -4,7 +4,7 @@ import './App.css'
 import { registrarUsuario } from './api/usuario'
 import { login } from './api/usuario';
 
-function Login() {
+function Login({onLogin}) {
   const [count, setCount] = useState(0)
   const [registrarse, setRegistrarse] = useState(false)
   const [nombre, setNombre] = useState("")
@@ -83,6 +83,7 @@ function Login() {
       }
       registrarUsuario(usuario)
       .then(item => {
+        onLogin(true);
         navigate('/Perfil')
       })
       .catch((err) => {
@@ -96,6 +97,7 @@ function Login() {
     login(loginCorreo, loginPassword)
     .then(item => {
       if (item) {
+        onLogin(true);
         navigate('/Inicio')
       } else {
         setErrorLogin("Usuario y contraseña incorrectos")
