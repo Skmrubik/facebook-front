@@ -10,3 +10,8 @@ export function registrarUsuario(usuario) {
     )
     .then((response) => response.json())
 }
+
+export function login(nombre, password) {
+    return fetch('http://localhost:8080/login?nombre='+nombre+'&password='+password)
+        .then((response) => response.json())
+}
