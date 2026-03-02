@@ -16,6 +16,11 @@ export function login(nombre, password) {
         .then((response) => response.json())
 }
 
+export function getPathFoto(id) {
+    return fetch('http://localhost:8080/pathFoto?id='+id)
+        .then((response) => response.json())
+}
+
 export function subirFoto(formData) {
     return fetch('http://localhost:8080/upload',
         {

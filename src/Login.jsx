@@ -5,7 +5,7 @@ import { registrarUsuario } from './api/usuario'
 import { login } from './api/usuario';
 import { subirFoto } from './api/usuario';
 
-function Login({onLogin}) {
+function Login({onLogin, idAuth}) {
   const [count, setCount] = useState(0)
   const [registrarse, setRegistrarse] = useState(false)
   const [nombre, setNombre] = useState("")
@@ -83,11 +83,14 @@ function Login({onLogin}) {
     }
     
     if (noError) {
+      const extension = file[0].name.split('.').pop();
+      const pathFoto = correo.split('@')[0]+'.'+extension;
       const usuario = {
         nombre,
         lugar,
         correo,
-        password
+        password, 
+        pathFoto
       }
       registrarUsuario(usuario)
       .then(item => {
@@ -116,10 +119,13 @@ function Login({onLogin}) {
     }
   }
 
+
   const loginUsuario = () => {
     login(loginCorreo, loginPassword)
     .then(item => {
-      if (item) {
+      if (item>=0) {
+        localStorage.setItem('id', item);
+        idAuth(item);
         onLogin(true);
         navigate('/Inicio')
       } else {
