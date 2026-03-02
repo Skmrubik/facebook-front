@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './App.css'
 import { registrarUsuario } from './api/usuario'
 import { login } from './api/usuario';
+import { subirFoto } from './api/usuario';
 
 function Login({onLogin}) {
   const [count, setCount] = useState(0)
@@ -16,8 +17,10 @@ function Login({onLogin}) {
   const [errorCorreo, setErrorCorreo] = useState("")
   const [errorPassword, setErrorPassword] = useState("")
   const [errorLogin, setErrorLogin] = useState("");
+  const [errorImagen, setErrorImagen] = useState("");
   const [loginCorreo, setLoginCorreo] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
   const inputLoginCorreo = (e) => {
@@ -43,6 +46,11 @@ function Login({onLogin}) {
   const inputPassword = (e) => {
     setPassword(e.target.value);
   }
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files;
+    setFile(file);
+  };
 
   const clickRegistro = () => {
     let noError = true;
@@ -83,6 +91,21 @@ function Login({onLogin}) {
       }
       registrarUsuario(usuario)
       .then(item => {
+        const formData = new FormData();
+        console.log("¿Qué hay en el estado?", file);
+        const nick = usuario.correo.split('@')[0];
+        formData.append('file', file[0], `${nick}.jpg`);
+        subirFoto(formData)
+        .then(item => {
+          if (item) {
+            console.log("Subido")
+          } else {
+            setErrorImagen("Imagen no se ha subido correctamente")
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
         onLogin(true);
         navigate('/Perfil')
       })
@@ -136,6 +159,8 @@ function Login({onLogin}) {
             <p className='error-registro'>{errorCorreo}</p>
             <input className='bloque-input' placeholder='Contraseña' type='password' onChange={inputPassword}></input>
             <p className='error-registro'>{errorPassword}</p>
+            <input type="file" onChange={handleFileChange} accept="image/*"/>
+            <p className='error-registro'>{errorImagen}</p>
             <button className='button-registrarse' onClick={clickRegistro}>Registrarse</button>
           </div>
           }
