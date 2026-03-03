@@ -16,6 +16,11 @@ export function login(nombre, password) {
         .then((response) => response.json())
 }
 
+export function getUsuario(id) {
+    return fetch('http://localhost:8080/getUsuarioById?id='+id)
+        .then((response) => response.json())
+}
+
 export function getPathFoto(id) {
     return fetch('http://localhost:8080/pathFoto?id='+id)
         .then((response) => response.json())

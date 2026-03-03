@@ -1,3 +1,6 @@
+body{
+  font-family: system-ui;
+}
 .inicio-container{
   display: flex;
   flex-direction: row;
@@ -112,4 +115,47 @@ body{
 
 .icono-casa{
   color: #a6a6a6;
+}
+
+.desplegable-perfil{
+  background-color: grey;
+  z-index: 2;
+  position: absolute;
+  right: 5px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contenedor-button-perfil{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  cursor: pointer;
+}
+
+.foto-nombre{
+  display: flex;
+  justify-content: center;
+  border-bottom: white 1px solid;
+  padding-bottom: 5px;
+}
+
+.nombre-desplegable{
+  font-family: system-ui;
+  margin-left: 5px;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+
+.cerrar-sesion{
+  color: white;
+  font-size: 20px;
+  display: flex;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.icono-cerrar-sesion{
+  margin-right: 5px;
 }

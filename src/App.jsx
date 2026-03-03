@@ -15,32 +15,25 @@ function App() {
 
   useEffect(()=>{
     console.log("useEffect isAuthenticated")
-    /*
-    getPathFoto(idAutentificacion)
-    .then(item => {
-      console.log("Item ", item)
-      setImagePerfil(item);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });*/
-  },[isAuthenticated])
-
-  useEffect(()=>{
-    console.log("Render cuando imagen perfil se actualiza")
-  },[imagePerfil])
+    const idUsuario = localStorage.getItem('id');
+    if (idUsuario!=null){
+      setIsAuthenticated(true);
+      setIdAutentificacion(idUsuario)
+    }
+  },[])
 
   return (
     <Router>
       {/* 1. La Navbar solo se renderiza si isAuthenticated es true */}
-      {isAuthenticated && <Navbar idUser={idAutentificacion}/>}
+      {isAuthenticated && <Navbar idUser={idAutentificacion} onLogin={setIsAuthenticated}/>}
 
       <Routes>
         {/* Ruta pública: Login */}
+        { !isAuthenticated && 
         <Route 
           path="/" 
           element={<Login onLogin={setIsAuthenticated} idAuth={setIdAutentificacion}/>} 
-        />
+        />}
 
         {/* Rutas protegidas*/} 
         <Route 
@@ -50,6 +43,10 @@ function App() {
         <Route 
           path="/Perfil" 
           element={<Perfil />} 
+        />
+        <Route 
+          path="*" 
+          element={<Inicio />} 
         />
       </Routes>
     </Router>
