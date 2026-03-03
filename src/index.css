@@ -159,3 +159,41 @@ body{
 .icono-cerrar-sesion{
   margin-right: 5px;
 }
+
+.inicio-container{
+  display: flex;
+  flex-direction: row;
+}
+.inicio-container-izq{
+  background-color: #4d4d4d;
+  width: 20%;
+}
+.inicio-container-cen{
+  background-color: #333333;
+  width: 60%;
+}
+.inicio-container-der{
+  background-color: #4d4d4d;
+  width: 20%;
+}
+
+.publicacion-header{
+  display: flex;
+}
+
+.publicacion{
+  color: white;
+  background-color: #737373;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.publicacion-nombre-uno{
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.publicacion-texto{
+  margin-top: 10px;
+}
