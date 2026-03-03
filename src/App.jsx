@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
       {/* 1. La Navbar solo se renderiza si isAuthenticated es true */}
-      {isAuthenticated && <Navbar image={idAutentificacion}/>}
+      {isAuthenticated && <Navbar idUser={idAutentificacion}/>}
 
       <Routes>
         {/* Ruta pública: Login */}

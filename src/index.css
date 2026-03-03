@@ -106,6 +106,8 @@ body{
   justify-content: space-between;
   padding: 10px 10px 5px 10px;
   background-color: #333333;
+  height: 45px;
+  border-bottom: 1px solid #a6a6a6;
 }
 
 .icono-casa{
