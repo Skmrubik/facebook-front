@@ -98,6 +98,8 @@ function Login({onLogin, idAuth}) {
       }
       registrarUsuario(usuario)
       .then(item => {
+        localStorage.setItem('id', item);
+        idAuth(item);
         const formData = new FormData();
         console.log("¿Qué hay en el estado?", file);
         const nick = usuario.correo.split('@')[0];
@@ -113,8 +115,11 @@ function Login({onLogin, idAuth}) {
         .catch((err) => {
           console.log(err.message);
         });
-        onLogin(true);
-        navigate('/Perfil')
+        setTimeout(() => {
+          onLogin(true);
+          navigate('/Perfil')
+        }, 2000);
+        
       })
       .catch((err) => {
         console.log(err.message);
