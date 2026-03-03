@@ -82,6 +82,10 @@ function Login({onLogin, idAuth}) {
       setErrorPassword("")
     }
     
+    if (file== null){
+      setErrorImagen("No has adjuntado imagen")
+      noError = false;
+    }
     if (noError) {
       const extension = file[0].name.split('.').pop();
       const pathFoto = correo.split('@')[0]+'.'+extension;
@@ -97,7 +101,7 @@ function Login({onLogin, idAuth}) {
         const formData = new FormData();
         console.log("¿Qué hay en el estado?", file);
         const nick = usuario.correo.split('@')[0];
-        formData.append('file', file[0], `${nick}.jpg`);
+        formData.append('file', file[0], `${nick}.${extension}`);
         subirFoto(formData)
         .then(item => {
           if (item) {
