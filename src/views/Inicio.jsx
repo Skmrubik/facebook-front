@@ -1,11 +1,23 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { listarPublicaciones } from '../api/publicacion';
+import { getUsuario } from '../api/usuario';
 
-const Inicio = () => {
+function Inicio(){
   const [publicaciones, setPublicaciones] = useState(null)
+  const [imageUrl, setImageUrl] = useState(null);
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(()=>{
+    getUsuario(localStorage.getItem('id'))
+    .then(item => {
+        console.log("Usuario ", item)
+        setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
+        setUsuario(item);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
     listarPublicaciones()
     .then(item => {
         console.log("publicaciones ",item)
@@ -22,7 +34,13 @@ const Inicio = () => {
 
       </div>
       <div className='inicio-container-cen'>
-        <div><h1>Inicio</h1></div>
+        {usuario !=null && <div className='crear-publicacion'>
+          <div className='crear-publicacion-header'>
+            <img src={imageUrl} style={{ width: '30px', height: '30px' }}></img>
+            <div className='publicacion-nombre-uno'>{usuario.nombre}</div>
+          </div>
+          <textarea className='crear-publicacion-texto'></textarea>
+        </div>}
         {publicaciones && publicaciones.map((publicacion,index)=> {
           return(
             <div className='publicacion'>
@@ -31,6 +49,14 @@ const Inicio = () => {
                 <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
               </div>
               <div className='publicacion-texto'>{publicacion.texto}</div>
+              <div className='publicacion-interaccion'>
+                <div>
+                  Me gusta
+                </div>
+                <div>
+                  Comentar
+                </div>
+              </div>
             </div>
           )
         })}

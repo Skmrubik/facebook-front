@@ -38,7 +38,7 @@ function App() {
         {/* Rutas protegidas*/} 
         <Route 
           path="/Inicio" 
-          element={<Inicio />} 
+          element={<Inicio idUser={idAutentificacion}/>} 
         />
         <Route 
           path="/Perfil" 
