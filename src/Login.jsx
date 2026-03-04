@@ -21,6 +21,7 @@ function Login({onLogin, idAuth}) {
   const [loginCorreo, setLoginCorreo] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [file, setFile] = useState(null);
+  const [nameFile, setNameFile] = useState("");
   const navigate = useNavigate();
 
   const inputLoginCorreo = (e) => {
@@ -49,6 +50,8 @@ function Login({onLogin, idAuth}) {
 
   const handleFileChange = async (e) => {
     const file = e.target.files;
+    console.log("FILE ", file[0].name)
+    setNameFile(file[0].name)
     setFile(file);
   };
 
@@ -174,7 +177,11 @@ function Login({onLogin, idAuth}) {
             <p className='error-registro'>{errorCorreo}</p>
             <input className='bloque-input' placeholder='Contraseña' type='password' onChange={inputPassword}></input>
             <p className='error-registro'>{errorPassword}</p>
-            <input type="file" onChange={handleFileChange} accept="image/*"/>
+            <input type="file" id="file-upload" onChange={handleFileChange} accept="image/*" style={{ display: 'none' }}/>
+            <label htmlFor="file-upload" className="custom-file-upload">
+              Subir foto de perfil
+            </label>
+            <p>{nameFile}</p>
             <p className='error-registro'>{errorImagen}</p>
             <button className='button-registrarse' onClick={clickRegistro}>Registrarse</button>
           </div>

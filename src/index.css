@@ -235,3 +235,17 @@ body{
   color: white;
   cursor: pointer;
 }
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
