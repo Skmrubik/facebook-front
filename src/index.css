@@ -196,6 +196,7 @@ body{
 
 .publicacion-texto{
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .publicacion-interaccion{
@@ -258,4 +259,8 @@ body{
 
 .custom-file-upload:hover {
   background-color: #0056b3;
+}
+
+.imagen-publicacion {
+  width: 100%;
 }

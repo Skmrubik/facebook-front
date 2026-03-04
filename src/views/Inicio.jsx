@@ -59,6 +59,7 @@ function Inicio(){
         console.log(item);
         if (item.status == 'ok') {
           console.log("Subido")
+          setNameFile("");
           guardarPathFoto(pathFoto)
           .then(item => {
             console.log("Subido")
@@ -142,7 +143,7 @@ function Inicio(){
           <textarea className='crear-publicacion-texto' onChange={inputAreaTexto} value={textoPublicacion}></textarea>
           <div style={{marginTop: 10, display: 'flex', justifyContent:'space-between'}}>
             <button className='button-publicar' onClick={publicar}>Publicar</button>  
-            <p style={{margin: 0}}>{nameFile}</p>
+            <p style={{margin: 0}} value={nameFile}>{nameFile}</p>
             <input type="file" id="file-upload" onChange={handleFileChange} accept="image/*" style={{ display: 'none' }}/>
             <label htmlFor="file-upload" className="button-subir-foto">
               Subir foto
@@ -157,6 +158,8 @@ function Inicio(){
                 <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
               </div>
               <div className='publicacion-texto'>{publicacion.texto}</div>
+              {publicacion.idFoto && 
+              <img className='imagen-publicacion' src={`http://localhost:8080/imagenes/${publicacion.idFoto?.path}`}></img>}
               <div className='publicacion-interaccion'>
                 <div>
                   Me gusta
