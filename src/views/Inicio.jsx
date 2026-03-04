@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { listarPublicaciones } from '../api/publicacion';
 import { getUsuario } from '../api/usuario';
+import { publicarInicio } from '../api/publicacion';
 
 function Inicio(){
   const [publicaciones, setPublicaciones] = useState(null)
   const [imageUrl, setImageUrl] = useState(null);
   const [usuario, setUsuario] = useState(null);
+  const [textoPublicacion, setTextoPublicacion] = useState("");
 
   useEffect(()=>{
     getUsuario(localStorage.getItem('id'))
@@ -28,6 +30,33 @@ function Inicio(){
     });
   },[])
 
+  const inputAreaTexto = (e) => {
+    setTextoPublicacion(e.target.value)
+  }
+
+  const publicar = () => {
+    const publicacion ={
+      idUsuario : localStorage.getItem('id'),
+      texto: textoPublicacion,
+      idFoto: null,
+    }
+    publicarInicio(publicacion)
+    .then(item => {
+        console.log("publicacion ",item)
+        setTextoPublicacion("");
+        listarPublicaciones()
+        .then(item => {
+            console.log("publicaciones ",item)
+            setPublicaciones(item)
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+  }
   return (
     <div className='inicio-container'>
       <div className='inicio-container-izq'>
@@ -39,7 +68,10 @@ function Inicio(){
             <img src={imageUrl} style={{ width: '30px', height: '30px' }}></img>
             <div className='publicacion-nombre-uno'>{usuario.nombre}</div>
           </div>
-          <textarea className='crear-publicacion-texto'></textarea>
+          <textarea className='crear-publicacion-texto' onChange={inputAreaTexto} value={textoPublicacion}></textarea>
+          <div style={{marginTop: 10}}>
+            <button className='button-publicar' onClick={publicar}>Publicar</button>  
+          </div>
         </div>}
         {publicaciones && publicaciones.map((publicacion,index)=> {
           return(

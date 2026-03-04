@@ -225,3 +225,13 @@ body{
   margin-top: 10px;
   font-family: system-ui;
 }
+
+.button-publicar{
+  background-color: gray;
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
