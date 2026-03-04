@@ -26,12 +26,3 @@ export function getPathFoto(id) {
         .then((response) => response.json())
 }
 
-export function subirFoto(formData) {
-    return fetch('http://localhost:8080/upload',
-        {
-            method: 'POST',
-            body: formData
-        }
-    )
-    .then((response) => response.json())
-}

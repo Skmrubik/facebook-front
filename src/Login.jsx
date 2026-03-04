@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './App.css'
 import { registrarUsuario } from './api/usuario'
 import { login } from './api/usuario';
-import { subirFoto } from './api/usuario';
+import { subirFoto } from './api/fotos';
 
 function Login({onLogin, idAuth}) {
   const [count, setCount] = useState(0)
