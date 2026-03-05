@@ -5,6 +5,8 @@ import { getUsuario } from '../api/usuario';
 import { publicarInicio } from '../api/publicacion';
 import { subirFoto } from '../api/fotos';
 import { guardarPathFoto } from '../api/fotos';
+import { GoTrash } from "react-icons/go";
+import { borrarPublicacion } from '../api/publicacion';
 
 function Inicio(){
   const [publicaciones, setPublicaciones] = useState(null)
@@ -48,12 +50,12 @@ function Inicio(){
   };
 
   const publicar = () => {
-    const extension = file[0].name.split('.').pop();
-    const pathFoto = generarString(20)+'.'+extension;
-    const formData = new FormData();
-    console.log("¿Qué hay en el estado?", file);
-    formData.append('file', file[0], pathFoto);
     if (file!=null){
+      const extension = file[0].name.split('.').pop();
+      const pathFoto = generarString(20)+'.'+extension;
+      const formData = new FormData();
+      console.log("¿Qué hay en el estado?", file);
+      formData.append('file', file[0], pathFoto);
       subirFoto(formData)
       .then(item => {
         console.log(item);
@@ -129,6 +131,23 @@ function Inicio(){
     setFile(file);
   };
 
+  function borrarPub(idPublicacion){
+    borrarPublicacion(idPublicacion)
+      .then(item => {
+          console.log("publicacion ",item)
+          listarPublicaciones()
+          .then(item => {
+              console.log("publicaciones ",item)
+              setPublicaciones(item)
+          })
+          .catch((err) => {
+              console.log(err.message);
+          });
+      })
+      .catch((err) => {
+          console.log(err.message);
+      });
+  }
   return (
     <div className='inicio-container'>
       <div className='inicio-container-izq'>
@@ -154,8 +173,14 @@ function Inicio(){
           return(
             <div className='publicacion'>
               <div className='publicacion-header'>
-                <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} style={{ width: '30px', height: '30px' }}></img>
-                <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+                <div className='publicacion-img-nombre'>
+                  <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} style={{ width: '30px', height: '30px' }}></img>
+                  <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+                </div>
+                <div>
+                  { localStorage.getItem('id') == publicacion.idUsuario1.idUsuario && 
+                  <GoTrash size="25px" className='icono-eliminar-publicacion' onClick={()=> borrarPub(publicacion.idPublicacion)}/>}
+                </div>
               </div>
               <div className='publicacion-texto'>{publicacion.texto}</div>
               {publicacion.idFoto && 

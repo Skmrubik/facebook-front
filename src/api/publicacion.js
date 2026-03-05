@@ -15,3 +15,14 @@ export function publicarInicio(publicacion) {
     )
     .then((response) => response.json())
 }
+
+export function borrarPublicacion(id) {
+    return fetch('http://localhost:8080/borrarPublicacion?id='+id,
+    {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((response) => response.json())
+}

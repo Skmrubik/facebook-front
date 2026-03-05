@@ -179,6 +179,7 @@ body{
 
 .publicacion-header{
   display: flex;
+  justify-content: space-between;
 }
 
 .publicacion{
@@ -263,4 +264,12 @@ body{
 
 .imagen-publicacion {
   width: 100%;
+}
+
+.publicacion-img-nombre{
+  display: flex;
+}
+
+.icono-eliminar-publicacion{
+  cursor: pointer;
 }
