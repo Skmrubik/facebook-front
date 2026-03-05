@@ -273,3 +273,44 @@ body{
 .icono-eliminar-publicacion{
   cursor: pointer;
 }
+
+.perfil-container{
+  display: flex;
+  flex-direction: row;
+}
+.perfil-container-izq{
+  background-color: #4d4d4d;
+  width: 20%;
+}
+.perfil-container-cen{
+  background-color: #333333;
+  width: 60%;
+}
+.perfil-container-der{
+  background-color: #4d4d4d;
+  width: 20%;
+}
+.perfil-header{
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+.perfil-header-nombre{
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+.perfil-header-lugar{
+  color: white;
+}
+
+.perfil-contenido-publicaciones{
+  background-color: #333333;
+  display: flex;
+}
+.container-fotos-amigos{
+  width: 40%;
+}
+.container-publicaciones-usuario{
+  width: 60%;
+}
