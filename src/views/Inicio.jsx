@@ -7,6 +7,7 @@ import { subirFoto } from '../api/fotos';
 import { guardarPathFoto } from '../api/fotos';
 import { GoTrash } from "react-icons/go";
 import { borrarPublicacion } from '../api/publicacion';
+import { useNavigate } from 'react-router-dom';
 
 function Inicio(){
   const [publicaciones, setPublicaciones] = useState(null)
@@ -15,6 +16,7 @@ function Inicio(){
   const [textoPublicacion, setTextoPublicacion] = useState("");
   const [file, setFile] = useState(null);
   const [nameFile, setNameFile] = useState("");
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getUsuario(localStorage.getItem('id'))
@@ -148,6 +150,14 @@ function Inicio(){
           console.log(err.message);
       });
   }
+
+  function irPerfilUsuario(idUser){
+    if (idUser!= localStorage.getItem('id')){
+      navigate("/Perfil/"+idUser)
+    } else {
+      navigate("/Perfil")
+    }
+  }
   return (
     <div className='inicio-container'>
       <div className='inicio-container-izq'>
@@ -173,7 +183,7 @@ function Inicio(){
           return(
             <div className='publicacion'>
               <div className='publicacion-header'>
-                <div className='publicacion-img-nombre'>
+                <div className='publicacion-img-nombre' onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
                   <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
                       style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
                   <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>

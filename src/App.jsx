@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Login from './Login';
 import Perfil from './views/Perfil';
+import PerfilAjeno from './views/PerfilAjeno';
 import Inicio from './views/Inicio';
 import { getPathFoto } from './api/usuario';
 //import Dashboard from './pages/Dashboard';
@@ -43,6 +44,10 @@ function App() {
         <Route 
           path="/Perfil" 
           element={<Perfil />} 
+        />
+        <Route 
+          path="/Perfil/:id" 
+          element={<PerfilAjeno />} 
         />
         <Route 
           path="*" 
