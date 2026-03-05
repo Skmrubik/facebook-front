@@ -155,7 +155,7 @@ const Perfil = () => {
       <div className='perfil-container-izq'></div>
       <div className='perfil-container-cen'>
         {usuario && <div className='perfil-header'>
-          <img src={imageUrl} style={{ width: '120px', height: '120px', marginRight: 15 }}></img>
+          <img src={imageUrl} style={{ width: '120px', height: '120px', marginRight: 15, borderRadius: '50%' }}></img>
           <div>
             <div className='perfil-header-nombre'>{usuario.nombre}</div>
             <div className='perfil-header-lugar'>{usuario.lugar}</div>
@@ -169,7 +169,7 @@ const Perfil = () => {
             <div className='container-publicaciones-usuario'>
               {usuario !=null && <div className='crear-publicacion'>
                 <div className='crear-publicacion-header'>
-                  <img src={imageUrl} style={{ width: '30px', height: '30px' }}></img>
+                  <img src={imageUrl} style={{ width: '30px', height: '30px', borderRadius: '50%' }}></img>
                   <div className='publicacion-nombre-uno'>{usuario.nombre}</div>
                 </div>
                 <textarea className='crear-publicacion-texto' onChange={inputAreaTexto} value={textoPublicacion}></textarea>
@@ -188,7 +188,8 @@ const Perfil = () => {
                     <div className='publicacion'>
                       <div className='publicacion-header'>
                         <div className='publicacion-img-nombre'>
-                          <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} style={{ width: '30px', height: '30px' }}></img>
+                          <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
+                                style={{ width: '30px', height: '30px', borderRadius: '50%' }}></img>
                           <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
                         </div>
                         <div>

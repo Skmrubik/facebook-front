@@ -156,7 +156,7 @@ function Inicio(){
       <div className='inicio-container-cen'>
         {usuario !=null && <div className='crear-publicacion'>
           <div className='crear-publicacion-header'>
-            <img src={imageUrl} style={{ width: '30px', height: '30px' }}></img>
+            <img src={imageUrl} style={{ width: '30px', height: '30px' , borderRadius: '50%'}}></img>
             <div className='publicacion-nombre-uno'>{usuario.nombre}</div>
           </div>
           <textarea className='crear-publicacion-texto' onChange={inputAreaTexto} value={textoPublicacion}></textarea>
@@ -174,7 +174,8 @@ function Inicio(){
             <div className='publicacion'>
               <div className='publicacion-header'>
                 <div className='publicacion-img-nombre'>
-                  <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} style={{ width: '30px', height: '30px' }}></img>
+                  <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
+                      style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
                   <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
                 </div>
                 <div>

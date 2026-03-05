@@ -57,7 +57,7 @@ function Navbar({idUser, onLogin}) {
             </div>
             <div className='contenedor-button-perfil'>
                 <div style={{color: 'white'}} className="button-perfil" onClick={setDesplegable}>
-                    <img src={imageUrl} style={{ width: '40px', height: '40px' }}></img>
+                    <img src={imageUrl} style={{ width: '40px', height: '40px', borderRadius: '50%' }}></img>
                 </div>
             </div>
             
@@ -65,7 +65,7 @@ function Navbar({idUser, onLogin}) {
             {mostrarDesplegable && 
             <div className='desplegable-perfil'>
                 <div className='foto-nombre'>
-                    <img src={imageUrl} style={{ width: '30px', height: '30px' }}></img>
+                    <img src={imageUrl} style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
                     <Link className="nombre-desplegable" to="/Perfil" onClick={setDesplegable}>{usuario.nombre}</Link>
                 </div>
                 <div className='cerrar-sesion' onClick={cerrarSesion}>
