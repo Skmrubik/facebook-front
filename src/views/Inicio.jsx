@@ -5,7 +5,7 @@ import { getUsuario } from '../api/usuario';
 import { publicarInicio } from '../api/publicacion';
 import { subirFoto } from '../api/fotos';
 import { guardarPathFoto } from '../api/fotos';
-
+import { GoTrash } from "react-icons/go";
 import { borrarPublicacion } from '../api/publicacion';
 import { useNavigate } from 'react-router-dom';
 import Publicacion from '../components/Publicacion';

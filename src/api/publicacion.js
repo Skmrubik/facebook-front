@@ -8,6 +8,12 @@ export function listarPublicacionesUsuario(idUser) {
         .then((response) => response.json())
 }
 
+
+export function listarMeGustasPublicacion(idPub) {
+    return fetch('http://localhost:8080/publicacionListMegusta?idPub='+idPub)
+        .then((response) => response.json())
+}
+
 export function publicarInicio(publicacion) {
     return fetch('http://localhost:8080/publicarInicio',
         {
@@ -16,6 +22,15 @@ export function publicarInicio(publicacion) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(publicacion)
+        }
+    )
+    .then((response) => response.json())
+}
+
+export function meGustaPublicacion(idUsuario, idPublicacion) {
+    return fetch('http://localhost:8080/meGustaPublicacion?idUser='+idUsuario+'&idPub='+idPublicacion,
+        {
+            method: 'POST',
         }
     )
     .then((response) => response.json())

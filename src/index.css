@@ -315,3 +315,12 @@ body{
 .container-publicaciones-usuario{
   width: 60%;
 }
+
+.container-megusta{
+  display: flex;
+  cursor: pointer;
+}
+
+.me-gustas-acumulados{
+  display: flex;
+}
