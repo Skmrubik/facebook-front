@@ -8,12 +8,18 @@ import { listarMeGustasPublicacion } from "../api/publicacion";
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
 
     const [meGustas,setMeGustas] = useState(null);
+    const [meGustaPropio, setMeGustaPropio] = useState(false);
 
     useEffect(()=> {
         listarMeGustasPublicacion(publicacion.idPublicacion)
         .then(item => {
             setMeGustas(item);
             console.log("get Me gusta ",item)
+            item.map((publicacion)=>{
+                if(publicacion.idUsuario.idUsuario == localStorage.getItem('id')){
+                    setMeGustaPropio(true);
+                }
+            });
         })
         .catch((err) => {
             console.log(err.message);
@@ -21,21 +27,24 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
     },[])
 
     function meGusta(){
-        meGustaPublicacion(localStorage.getItem('id'), publicacion.idPublicacion)
-        .then(item => {
-            console.log("Me gusta ",item)
-            listarMeGustasPublicacion(publicacion.idPublicacion)
+        if (!meGustaPropio) {
+            meGustaPublicacion(localStorage.getItem('id'), publicacion.idPublicacion)
             .then(item => {
-                setMeGustas(item);
-                console.log("get Me gusta ",item)
+                console.log("Me gusta ",item)
+                setMeGustaPropio(true);
+                listarMeGustasPublicacion(publicacion.idPublicacion)
+                .then(item => {
+                    setMeGustas(item);
+                    console.log("get Me gusta ",item)
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
             })
             .catch((err) => {
                 console.log(err.message);
             });
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+        }
     }
     return (
         <div className='publicacion'>
@@ -55,15 +64,22 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
           <img className='imagen-publicacion' src={`http://localhost:8080/imagenes/${publicacion.idFoto?.path}`}></img>}
           {meGustas?.length>0 && <div className="me-gustas-acumulados">
             <AiFillLike size="20px"/>
-            {meGustas.map((meGusta, index) => {
-                return(<div>{meGusta.idUsuario.nombre}</div>)
-            })}
+            <div style={{display: 'flex'}}>
+            {meGustas.length==1 && <div>{meGustas[0].idUsuario.nombre}</div>}
+            {meGustas.length>1 && <div>{meGustas[0].idUsuario.nombre} y {meGustas.length-1} más</div>}
+            </div>
           </div>}
           <div className='publicacion-interaccion'>
+            {!meGustaPropio && 
             <div className="container-megusta" onClick={meGusta}>
                 <AiOutlineLike size="25px" className="icono-megusta"/>
                 <p style={{margin: 0, marginLeft: 5}}>Me gusta</p>
-            </div>
+            </div>}
+            {meGustaPropio && 
+            <div className="container-megusta-activo" onClick={meGusta}>
+                <AiOutlineLike size="25px" className="icono-megusta"/>
+                <p style={{margin: 0, marginLeft: 5}}>Me gusta</p>
+            </div>}
             <div>
               Comentar
             </div>

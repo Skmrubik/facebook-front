@@ -324,3 +324,9 @@ body{
 .me-gustas-acumulados{
   display: flex;
 }
+
+.container-megusta-activo{
+  display: flex;
+  cursor: pointer;
+  color: #3399ff;
+}
