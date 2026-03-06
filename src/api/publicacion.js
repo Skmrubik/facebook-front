@@ -46,3 +46,19 @@ export function borrarPublicacion(id) {
     })
     .then((response) => response.json())
 }
+
+export function getMegusta(idUser,idPub) {
+    return fetch('http://localhost:8080/getMegusta?idUser='+idUser+'&idPub='+idPub)
+        .then((response) => response.json())
+}
+
+export function borrarMegusta(id) {
+    return fetch('http://localhost:8080/borrarMegusta?id='+id,
+    {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((response) => response.json())
+}

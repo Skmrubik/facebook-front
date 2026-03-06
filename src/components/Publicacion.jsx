@@ -4,6 +4,8 @@ import { GoTrash } from "react-icons/go";
 import { meGustaPublicacion } from "../api/publicacion";
 import { AiFillLike } from "react-icons/ai";
 import { listarMeGustasPublicacion } from "../api/publicacion";
+import { getMegusta } from "../api/publicacion";
+import { borrarMegusta } from "../api/publicacion";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
 
@@ -40,6 +42,31 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
                 .catch((err) => {
                     console.log(err.message);
                 });
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        } else {
+            getMegusta(localStorage.getItem('id'), publicacion.idPublicacion)
+            .then(item => {
+                console.log("Me gusta ",item)
+                setMeGustaPropio(false);
+                borrarMegusta(item)
+                .then(item => {
+                    console.log("borrar ", item)
+                    listarMeGustasPublicacion(publicacion.idPublicacion)
+                    .then(item => {
+                        setMeGustas(item);
+                        console.log("get Me gusta ",item)
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+                
             })
             .catch((err) => {
                 console.log(err.message);
