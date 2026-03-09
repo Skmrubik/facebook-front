@@ -15,25 +15,14 @@ function Navbar({idUser, onLogin}) {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        console.log("Navbar id: ", idUser)
         getUsuario(idUser)
         .then(item => {
-            console.log("Usuario ", item)
             setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
             setUsuario(item);
         })
         .catch((err) => {
             console.log(err.message);
         });
-        /*
-        getPathFoto(idUser)
-        .then(item => {
-            console.log("Item ", item.fileName)
-            setImageUrl(`http://localhost:8080/imagenes/${item.fileName}`);
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });*/
     },[])
 
     function setDesplegable(){

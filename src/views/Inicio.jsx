@@ -22,7 +22,6 @@ function Inicio(){
   useEffect(()=>{
     getUsuario(localStorage.getItem('id'))
     .then(item => {
-        console.log("Usuario ", item)
         setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
         setUsuario(item);
     })
@@ -31,7 +30,6 @@ function Inicio(){
     });
     listarPublicaciones()
     .then(item => {
-        console.log("publicaciones ",item)
         setPublicaciones(item)
     })
     .catch((err) => {
@@ -57,17 +55,14 @@ function Inicio(){
       const extension = file[0].name.split('.').pop();
       const pathFoto = generarString(20)+'.'+extension;
       const formData = new FormData();
-      console.log("¿Qué hay en el estado?", file);
       formData.append('file', file[0], pathFoto);
       subirFoto(formData)
       .then(item => {
         console.log(item);
         if (item.status == 'ok') {
-          console.log("Subido")
           setNameFile("");
           guardarPathFoto(pathFoto)
           .then(item => {
-            console.log("Subido")
             const publicacion = {
               idUsuario : localStorage.getItem('id'),
               texto: textoPublicacion,
@@ -75,7 +70,6 @@ function Inicio(){
             }
             publicarInicio(publicacion)
             .then(item => {
-                console.log("publicacion ",item)
                 setTextoPublicacion("");
                 listarPublicaciones()
                 .then(item => {
@@ -108,7 +102,6 @@ function Inicio(){
       }
       publicarInicio(publicacion)
       .then(item => {
-          console.log("publicacion ",item)
           setTextoPublicacion("");
           listarPublicaciones()
           .then(item => {
@@ -129,7 +122,6 @@ function Inicio(){
 
   const handleFileChange = async (e) => {
     const file = e.target.files;
-    console.log("FILE ", file[0].name)
     setNameFile(file[0].name)
     setFile(file);
   };
@@ -137,7 +129,6 @@ function Inicio(){
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
       .then(item => {
-          console.log("publicacion ",item)
           listarPublicaciones()
           .then(item => {
               console.log("publicaciones ",item)
@@ -180,9 +171,9 @@ function Inicio(){
             </label>
           </div>
         </div>}
-        {publicaciones && publicaciones.map((publicacion,index)=> {
+        {publicaciones && publicaciones.map((publicacion)=> {
           return(
-           <Publicacion publicacion={publicacion}  irPerfilUsuario={irPerfilUsuario} borrarPub={borrarPub} />
+           <Publicacion publicacion={publicacion} key={publicacion.idPublicacion}  irPerfilUsuario={irPerfilUsuario} borrarPub={borrarPub} />
           )
         })}
       </div>

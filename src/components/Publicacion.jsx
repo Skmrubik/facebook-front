@@ -7,7 +7,7 @@ import { listarMeGustasPublicacion } from "../api/publicacion";
 import { getMegusta } from "../api/publicacion";
 import { borrarMegusta } from "../api/publicacion";
 
-function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
+function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
     const [meGustas,setMeGustas] = useState(null);
     const [meGustaPropio, setMeGustaPropio] = useState(false);
@@ -16,7 +16,7 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
         listarMeGustasPublicacion(publicacion.idPublicacion)
         .then(item => {
             setMeGustas(item);
-            console.log("get Me gusta ",item)
+            console.log(publicacion.idPublicacion," get Me gusta ",item)
             item.map((publicacion)=>{
                 if(publicacion.idUsuario.idUsuario == localStorage.getItem('id')){
                     setMeGustaPropio(true);
@@ -32,12 +32,10 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
         if (!meGustaPropio) {
             meGustaPublicacion(localStorage.getItem('id'), publicacion.idPublicacion)
             .then(item => {
-                console.log("Me gusta ",item)
                 setMeGustaPropio(true);
                 listarMeGustasPublicacion(publicacion.idPublicacion)
                 .then(item => {
                     setMeGustas(item);
-                    console.log("get Me gusta ",item)
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -49,15 +47,12 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
         } else {
             getMegusta(localStorage.getItem('id'), publicacion.idPublicacion)
             .then(item => {
-                console.log("Me gusta ",item)
                 setMeGustaPropio(false);
                 borrarMegusta(item)
                 .then(item => {
-                    console.log("borrar ", item)
                     listarMeGustasPublicacion(publicacion.idPublicacion)
                     .then(item => {
                         setMeGustas(item);
-                        console.log("get Me gusta ",item)
                     })
                     .catch((err) => {
                         console.log(err.message);
@@ -74,7 +69,7 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, actualizarPub}) {
         }
     }
     return (
-        <div className='publicacion'>
+        <div className='publicacion' key={key}>
           <div className='publicacion-header'>
             <div className='publicacion-img-nombre' onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
               <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
