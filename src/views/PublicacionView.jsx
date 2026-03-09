@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { getPublicacionById } from '../api/publicacion';
+import { listarMeGustasPublicacion } from '../api/publicacion';
 
 const PublicacionView = () => {
   const { id } = useParams();
@@ -15,10 +16,10 @@ const PublicacionView = () => {
     .then(item => {
         console.log("Usuario ", item)
         setPublicacion(item);
-        listarMeGustasPublicacion(publicacion.idPublicacion)
+        listarMeGustasPublicacion(item.idPublicacion)
         .then(item => {
             setMeGustas(item);
-            console.log(publicacion.idPublicacion," get Me gusta ",item)
+            console.log(item.idPublicacion," get Me gusta ",item)
             item.map((publicacion)=>{
                 if(publicacion.idUsuario.idUsuario == localStorage.getItem('id')){
                     setMeGustaPropio(true);
