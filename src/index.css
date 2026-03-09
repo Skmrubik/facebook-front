@@ -330,3 +330,15 @@ body{
   cursor: pointer;
   color: #3399ff;
 }
+
+.publicacion-fecha{
+  margin-left: 10px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.publicacion-container{
+  display: flex;
+  flex-direction: row;
+  min-height: 93.5vh;
+}

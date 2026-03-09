@@ -66,7 +66,8 @@ function Inicio(){
             const publicacion = {
               idUsuario : localStorage.getItem('id'),
               texto: textoPublicacion,
-              idFoto: item
+              idFoto: item,
+              fecha :new Date().toISOString()
             }
             publicarInicio(publicacion)
             .then(item => {
@@ -99,6 +100,7 @@ function Inicio(){
         idUsuario : localStorage.getItem('id'),
         texto: textoPublicacion,
         idFoto: null,
+        fecha :new Date().toISOString()
       }
       publicarInicio(publicacion)
       .then(item => {

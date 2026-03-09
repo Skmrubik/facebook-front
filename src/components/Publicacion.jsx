@@ -6,11 +6,13 @@ import { AiFillLike } from "react-icons/ai";
 import { listarMeGustasPublicacion } from "../api/publicacion";
 import { getMegusta } from "../api/publicacion";
 import { borrarMegusta } from "../api/publicacion";
+import { useNavigate } from 'react-router-dom';
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
     const [meGustas,setMeGustas] = useState(null);
     const [meGustaPropio, setMeGustaPropio] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(()=> {
         listarMeGustasPublicacion(publicacion.idPublicacion)
@@ -68,13 +70,21 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
             });
         }
     }
+
+    function irAPublicacion(idPub){
+        navigate("/Publicacion/"+idPub)
+    }
     return (
         <div className='publicacion' key={key}>
           <div className='publicacion-header'>
-            <div className='publicacion-img-nombre' onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
-              <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
-                  style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
-              <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+            <div className='publicacion-img-nombre'>
+                <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
+                    <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
+                        style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
+                    <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+                </div>
+              <div className="publicacion-fecha" onClick={() => irAPublicacion(publicacion.idPublicacion)}>
+                {publicacion.fecha?.substring(0,10)+' '+publicacion.fecha?.substring(11,16)}</div>
             </div>
             <div>
               { localStorage.getItem('id') == publicacion.idUsuario1.idUsuario && 

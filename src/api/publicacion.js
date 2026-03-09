@@ -62,3 +62,8 @@ export function borrarMegusta(id) {
     })
     .then((response) => response.json())
 }
+
+export function getPublicacionById(idPub) {
+    return fetch('http://localhost:8080/getPublicacionById?id='+idPub)
+        .then((response) => response.json())
+}

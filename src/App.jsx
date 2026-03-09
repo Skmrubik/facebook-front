@@ -6,6 +6,7 @@ import Perfil from './views/Perfil';
 import PerfilAjeno from './views/PerfilAjeno';
 import Inicio from './views/Inicio';
 import { getPathFoto } from './api/usuario';
+import PublicacionView from './views/PublicacionView';
 //import Dashboard from './pages/Dashboard';
 
 function App() {
@@ -48,6 +49,10 @@ function App() {
         <Route 
           path="/Perfil/:id" 
           element={<PerfilAjeno />} 
+        />
+        <Route 
+          path="/Publicacion/:id" 
+          element={<PublicacionView />} 
         />
         <Route 
           path="*" 
