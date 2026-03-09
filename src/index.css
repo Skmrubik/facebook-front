@@ -128,7 +128,7 @@ body{
 
 .contenedor-button-perfil{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: end;
   cursor: pointer;
 }
@@ -341,4 +341,21 @@ body{
   display: flex;
   flex-direction: row;
   min-height: 93.5vh;
+}
+
+.circulo-notificaciones{
+  background-color: #4d4d4d;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notificacion{
+  cursor: pointer;
+  max-width: 200px;
 }

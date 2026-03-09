@@ -26,3 +26,8 @@ export function getPathFoto(id) {
         .then((response) => response.json())
 }
 
+export function getNotificacionesUsuarioNoLeidas(id) {
+    return fetch('http://localhost:8080/getNotificacionesUsuario?idUsuario='+id)
+        .then((response) => response.json())
+}
+

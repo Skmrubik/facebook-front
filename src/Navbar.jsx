@@ -5,6 +5,8 @@ import { getPathFoto } from './api/usuario';
 import { getUsuario } from './api/usuario';
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
+import { AiFillBell } from "react-icons/ai";
+import { getNotificacionesUsuarioNoLeidas } from './api/usuario';
 
 function Navbar({idUser, onLogin}) {
 
@@ -12,6 +14,8 @@ function Navbar({idUser, onLogin}) {
     const [imageUrl, setImageUrl] = useState(null);
     const [usuario, setUsuario] = useState(null);
     const [mostrarDesplegable, setMostrarDesplegable] = useState(false);
+    const [mostrarDesplegableNotificaciones, setMostrarDesplegableNotificaciones] = useState(false);
+    const [notificaciones, setNotificaciones] = useState(null);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -23,16 +27,38 @@ function Navbar({idUser, onLogin}) {
         .catch((err) => {
             console.log(err.message);
         });
+        getNotificacionesUsuarioNoLeidas(idUser)
+        .then(item => {
+            console.log(item)
+            setNotificaciones(item);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
     },[])
 
     function setDesplegable(){
+        if (mostrarDesplegableNotificaciones){
+            setMostrarDesplegableNotificaciones(false);
+        }
         setMostrarDesplegable(!mostrarDesplegable);
     }
 
+    function setDesplegableNotificaciones(){
+        if (mostrarDesplegable) {
+            setMostrarDesplegable(false)
+        }
+        setMostrarDesplegableNotificaciones(!mostrarDesplegableNotificaciones)
+    }
     function cerrarSesion(){
         onLogin(false);
         localStorage.removeItem('id');
         navigate('/')
+    }
+
+    function irNotificacion(notificacion){
+        setDesplegableNotificaciones(false);
+        navigate(notificacion.url)
     }
 
     return (
@@ -45,11 +71,15 @@ function Navbar({idUser, onLogin}) {
                 <div style={{marginTop: 5}}><Link to="/Inicio"><CgHome size="30px" className='icono-casa'/></Link></div>
             </div>
             <div className='contenedor-button-perfil'>
+                <div style={{color: 'white'}} className="button-notificaciones" onClick={setDesplegableNotificaciones}>
+                    <div className='circulo-notificaciones'>
+                        <AiFillBell size="30px"/>
+                    </div>
+                </div>
                 <div style={{color: 'white'}} className="button-perfil" onClick={setDesplegable}>
                     <img src={imageUrl} style={{ width: '40px', height: '40px', borderRadius: '50%' }}></img>
                 </div>
-            </div>
-            
+            </div>           
         </nav>
             {mostrarDesplegable && 
             <div className='desplegable-perfil'>
@@ -61,6 +91,16 @@ function Navbar({idUser, onLogin}) {
                     <BiLogOut size="30px" className='icono-cerrar-sesion'/>
                     <div>Cerrar sesión</div>
                 </div>
+            </div>}
+            {mostrarDesplegableNotificaciones && 
+            <div className='desplegable-perfil'>
+                {notificaciones.map((notificacion) => {
+                    return(
+                        <div className='notificacion' onClick={() => irNotificacion(notificacion)}>
+                            {notificacion.texto }
+                        </div>
+                    )
+                })}
             </div>}
         </>
     );

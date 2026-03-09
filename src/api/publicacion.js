@@ -67,3 +67,17 @@ export function getPublicacionById(idPub) {
     return fetch('http://localhost:8080/getPublicacionById?id='+idPub)
         .then((response) => response.json())
 }
+
+
+export function enviarNotificacion(notificacion) {
+    return fetch('http://localhost:8080/guardarNotificacion',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(notificacion)
+        }
+    )
+    .then((response) => response.json())
+}

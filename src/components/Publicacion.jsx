@@ -7,14 +7,24 @@ import { listarMeGustasPublicacion } from "../api/publicacion";
 import { getMegusta } from "../api/publicacion";
 import { borrarMegusta } from "../api/publicacion";
 import { useNavigate } from 'react-router-dom';
+import { enviarNotificacion } from "../api/publicacion";
+import { getUsuario } from "../api/usuario";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
     const [meGustas,setMeGustas] = useState(null);
     const [meGustaPropio, setMeGustaPropio] = useState(false);
+    const [usuario, setUsuario] = useState(null);
     const navigate = useNavigate();
 
     useEffect(()=> {
+        getUsuario(localStorage.getItem('id'))
+        .then(item => {
+            setUsuario(item);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
         listarMeGustasPublicacion(publicacion.idPublicacion)
         .then(item => {
             setMeGustas(item);
@@ -34,6 +44,20 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         if (!meGustaPropio) {
             meGustaPublicacion(localStorage.getItem('id'), publicacion.idPublicacion)
             .then(item => {
+                const notificacion = {
+                    idUsuario: publicacion.idUsuario1.idUsuario,
+                    texto: 'Tu publicación ha recibido un me gusta de '+ usuario.nombre,
+                    tipo: 0,
+                    url: '/Publicacion/'+publicacion.idPublicacion,
+                    leido: false,
+                }
+                enviarNotificacion(notificacion)
+                .then(item => {
+                    console.log("Notificacion ", item);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
                 setMeGustaPropio(true);
                 listarMeGustasPublicacion(publicacion.idPublicacion)
                 .then(item => {
