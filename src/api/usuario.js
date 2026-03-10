@@ -31,3 +31,7 @@ export function getNotificacionesUsuarioNoLeidas(id) {
         .then((response) => response.json())
 }
 
+export function listarUsuarios() {
+    return fetch('http://localhost:8080/listUsuarios')
+        .then((response) => response.json())
+}
