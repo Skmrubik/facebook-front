@@ -92,6 +92,10 @@ function Navbar({idUser, onLogin}) {
                     <div className='circulo-notificaciones'>
                         <AiFillBell size="30px"/>
                     </div>
+                    {notificaciones?.length>0 && 
+                    <div className='notificacion-cantidad'>
+                        {notificaciones.length}
+                    </div>}
                 </div>
                 <div style={{color: 'white'}} className="button-perfil" onClick={setDesplegable}>
                     <img src={imageUrl} style={{ width: '40px', height: '40px', borderRadius: '50%' }}></img>

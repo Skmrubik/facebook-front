@@ -358,4 +358,21 @@ body{
 .notificacion{
   cursor: pointer;
   max-width: 200px;
+  margin-bottom: 10px;
+}
+
+.notificacion-cantidad{
+  position: absolute;
+  background-color: red;
+  color: white;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 55px;
+  top: 7px;
+  font-weight: 700;
 }
