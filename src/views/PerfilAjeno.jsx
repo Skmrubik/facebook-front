@@ -51,6 +51,34 @@ const PerfilAjeno = () => {
         });
   },[])
 
+  useEffect(()=>{
+    getUsuario(id)
+    .then(item => {
+        console.log("Usuario ", item)
+        setImageUrlAjeno(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
+        setUsuarioAjeno(item);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+    getUsuario(localStorage.getItem('id'))
+    .then(item => {
+        console.log("Usuario ", item)
+        setUsuario(item);
+        setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+    listarPublicacionesUsuario(id)
+        .then(item => {
+            console.log("publicaciones ",item)
+            setPublicaciones(item)
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+  },[id])
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
       .then(item => {

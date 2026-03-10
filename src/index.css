@@ -286,6 +286,7 @@ body{
 .perfil-container-cen{
   background-color: #333333;
   width: 60%;
+  min-height: 93.5vh;
 }
 .perfil-container-der{
   background-color: #4d4d4d;
