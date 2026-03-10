@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CgHome } from "react-icons/cg";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import { getPathFoto } from './api/usuario';
 import { getUsuario } from './api/usuario';
 import { BiLogOut } from "react-icons/bi";
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillBell } from "react-icons/ai";
 import { getNotificacionesUsuarioNoLeidas } from './api/usuario';
 import { marcarComoLeido } from './api/publicacion';
+import { useOutsideClick } from './hook/useOutsideClick';
 
 function Navbar({idUser, onLogin}) {
 
@@ -17,6 +18,8 @@ function Navbar({idUser, onLogin}) {
     const [mostrarDesplegable, setMostrarDesplegable] = useState(false);
     const [mostrarDesplegableNotificaciones, setMostrarDesplegableNotificaciones] = useState(false);
     const [notificaciones, setNotificaciones] = useState(null);
+    const containerRef = useRef(null);
+    const containerRefNot = useRef(null);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -37,6 +40,9 @@ function Navbar({idUser, onLogin}) {
             console.log(err.message);
         });
     },[])
+
+    useOutsideClick(containerRef, () => setMostrarDesplegable(false));
+    useOutsideClick(containerRefNot, () => setMostrarDesplegableNotificaciones(false));
 
     function setDesplegable(){
         if (mostrarDesplegableNotificaciones){
@@ -103,7 +109,7 @@ function Navbar({idUser, onLogin}) {
             </div>           
         </nav>
             {mostrarDesplegable && 
-            <div className='desplegable-perfil'>
+            <div className='desplegable-perfil' ref={containerRef}>
                 <div className='foto-nombre'>
                     <img src={imageUrl} style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
                     <Link className="nombre-desplegable" to="/Perfil" onClick={setDesplegable}>{usuario.nombre}</Link>
@@ -114,7 +120,7 @@ function Navbar({idUser, onLogin}) {
                 </div>
             </div>}
             {mostrarDesplegableNotificaciones && notificaciones.length>0 &&
-            <div className='desplegable-perfil'>
+            <div className='desplegable-perfil' ref={containerRefNot}>
                 {notificaciones.map((notificacion) => {
                     return(
                         <div className='notificacion' onClick={() => irNotificacion(notificacion)}>
