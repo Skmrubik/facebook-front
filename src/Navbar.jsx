@@ -7,6 +7,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 import { AiFillBell } from "react-icons/ai";
 import { getNotificacionesUsuarioNoLeidas } from './api/usuario';
+import { marcarComoLeido } from './api/publicacion';
 
 function Navbar({idUser, onLogin}) {
 
@@ -57,6 +58,22 @@ function Navbar({idUser, onLogin}) {
     }
 
     function irNotificacion(notificacion){
+        console.log("NOT ", notificacion)
+        marcarComoLeido(notificacion.idUsuarioNotificacion)
+        .then(item => {
+            console.log(item)
+            getNotificacionesUsuarioNoLeidas(idUser)
+            .then(item => {
+                console.log(item)
+                setNotificaciones(item);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
         setDesplegableNotificaciones(false);
         navigate(notificacion.url)
     }
@@ -92,7 +109,7 @@ function Navbar({idUser, onLogin}) {
                     <div>Cerrar sesión</div>
                 </div>
             </div>}
-            {mostrarDesplegableNotificaciones && 
+            {mostrarDesplegableNotificaciones && notificaciones.length>0 &&
             <div className='desplegable-perfil'>
                 {notificaciones.map((notificacion) => {
                     return(

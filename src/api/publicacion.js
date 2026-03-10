@@ -80,4 +80,16 @@ export function enviarNotificacion(notificacion) {
         }
     )
     .then((response) => response.json())
+} 
+
+export function marcarComoLeido(idNot) {
+    return fetch('http://localhost:8080/marcarComoLeida?idNot='+idNot,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+    )
+        .then((response) => response.json())
 }
