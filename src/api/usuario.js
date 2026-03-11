@@ -35,3 +35,20 @@ export function listarUsuarios() {
     return fetch('http://localhost:8080/listUsuarios')
         .then((response) => response.json())
 }
+
+export function solicitudAmistad(usuario1, usuario2) {
+    return fetch('http://localhost:8080/solicitudAmistad?id1='+usuario1+'&id2='+usuario2,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+    )
+    .then((response) => response.json())
+}
+
+export function listSolicitudesAmistad(idUsuario) {
+    return fetch('http://localhost:8080/getSolicitudes?id='+idUsuario)
+        .then((response) => response.json())
+}

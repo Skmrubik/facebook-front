@@ -11,6 +11,7 @@ import { borrarPublicacion } from '../api/publicacion';
 import Publicacion from '../components/Publicacion';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { enviarNotificacion } from '../api/publicacion';
+import { solicitudAmistad } from '../api/usuario';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -201,7 +202,7 @@ const PerfilAjeno = () => {
       navigate("/Perfil")
     }
   }
-  function solicitudAmistad(){
+  function solicitudAmist(){
     const notificacion = {
         idUsuario: usuarioAjeno.idUsuario,
         texto: 'Has recibido una petición de amistad de '+ usuario.nombre,
@@ -209,13 +210,21 @@ const PerfilAjeno = () => {
         url: '/Solicitudes',
         leido: false,
     }
-    enviarNotificacion(notificacion)
+    solicitudAmistad(usuarioAjeno.idUsuario, usuario.idUsuario)
     .then(item => {
-        console.log("Notificacion ", item);
+        console.log("Solicitud ", item);
+        enviarNotificacion(notificacion)
+        .then(item => {
+            console.log("Notificacion ", item);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
     })
     .catch((err) => {
         console.log(err.message);
     });
+    
   }
   
   return (
@@ -230,7 +239,7 @@ const PerfilAjeno = () => {
               <div className='perfil-header-lugar'>{usuarioAjeno.lugar}</div>
             </div>
           </div>
-          <button className='aniadir-amigo' onClick={solicitudAmistad}>
+          <button className='aniadir-amigo' onClick={solicitudAmist}>
             <AiOutlineUserAdd size="20px" /><div>Añadir amigo</div>
           </button>
         </div>}
