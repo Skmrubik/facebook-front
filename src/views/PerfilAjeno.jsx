@@ -9,6 +9,8 @@ import { guardarPathFoto } from '../api/fotos';
 import { GoTrash } from "react-icons/go";
 import { borrarPublicacion } from '../api/publicacion';
 import Publicacion from '../components/Publicacion';
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { enviarNotificacion } from '../api/publicacion';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -199,17 +201,38 @@ const PerfilAjeno = () => {
       navigate("/Perfil")
     }
   }
-
+  function solicitudAmistad(){
+    const notificacion = {
+        idUsuario: usuarioAjeno.idUsuario,
+        texto: 'Has recibido una petición de amistad de '+ usuario.nombre,
+        tipo: 1,
+        url: '/Solicitudes',
+        leido: false,
+    }
+    enviarNotificacion(notificacion)
+    .then(item => {
+        console.log("Notificacion ", item);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+  }
+  
   return (
     <div className='perfil-container'>
       <div className='perfil-container-izq'></div>
       <div className='perfil-container-cen'>
         {usuario && <div className='perfil-header'>
-          <img src={imageUrlAjeno} style={{ width: '120px', height: '120px', marginRight: 15, borderRadius: '50%' }}></img>
-          <div>
-            <div className='perfil-header-nombre'>{usuarioAjeno.nombre}</div>
-            <div className='perfil-header-lugar'>{usuarioAjeno.lugar}</div>
+          <div className='perfil-nombre-imagen'>
+            <img src={imageUrlAjeno} style={{ width: '120px', height: '120px', marginRight: 15, borderRadius: '50%' }}></img>
+            <div>
+              <div className='perfil-header-nombre'>{usuarioAjeno.nombre}</div>
+              <div className='perfil-header-lugar'>{usuarioAjeno.lugar}</div>
+            </div>
           </div>
+          <button className='aniadir-amigo' onClick={solicitudAmistad}>
+            <AiOutlineUserAdd size="20px" /><div>Añadir amigo</div>
+          </button>
         </div>}
         <div className='perfil-contenido'>
           {contenido == 0 && 

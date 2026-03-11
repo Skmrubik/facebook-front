@@ -296,6 +296,7 @@ body{
   display: flex;
   padding: 20px;
   align-items: center;
+  justify-content: space-between;
 }
 .perfil-header-nombre{
   color: white;
@@ -380,4 +381,36 @@ body{
 
 .navbar-primer-contenedor{
   display: flex;
+}
+
+.svg-facebook{
+  z-index:2;
+}
+
+.circulo-blanco-fondo{
+  position: absolute;
+  background-color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  z-index: 1;
+  left: 14px;
+  top: 14px;
+}
+
+.perfil-nombre-imagen{
+  display: flex;
+  align-items: center;
+}
+
+.aniadir-amigo{
+  display: flex;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background-color: #1a75ff;
+  border: none;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
 }
