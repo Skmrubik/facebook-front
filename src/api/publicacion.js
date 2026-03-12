@@ -3,6 +3,11 @@ export function listarPublicaciones() {
         .then((response) => response.json())
 }
 
+export function listarPublicacionesAmigos(idUsuario) {
+    return fetch('http://localhost:8080/listPublicacionesAmigos?idUsu='+idUsuario)
+        .then((response) => response.json())
+}
+
 export function listarPublicacionesUsuario(idUser) {
     return fetch('http://localhost:8080/listPublicacionesByUser?id='+idUser)
         .then((response) => response.json())

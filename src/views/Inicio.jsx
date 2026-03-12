@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { listarPublicaciones } from '../api/publicacion';
+import { listarPublicaciones, listarPublicacionesAmigos } from '../api/publicacion';
 import { getUsuario } from '../api/usuario';
 import { publicarInicio } from '../api/publicacion';
 import { subirFoto } from '../api/fotos';
@@ -28,7 +28,7 @@ function Inicio(){
     .catch((err) => {
         console.log(err.message);
     });
-    listarPublicaciones()
+    listarPublicacionesAmigos(localStorage.getItem('id'))
     .then(item => {
         setPublicaciones(item)
     })
@@ -72,7 +72,7 @@ function Inicio(){
             publicarInicio(publicacion)
             .then(item => {
                 setTextoPublicacion("");
-                listarPublicaciones()
+                listarPublicacionesAmigos(localStorage.getItem('id'))
                 .then(item => {
                     console.log("publicaciones ",item)
                     setPublicaciones(item)
@@ -105,7 +105,7 @@ function Inicio(){
       publicarInicio(publicacion)
       .then(item => {
           setTextoPublicacion("");
-          listarPublicaciones()
+          listarPublicacionesAmigos(localStorage.getItem('id'))
           .then(item => {
               console.log("publicaciones ",item)
               setPublicaciones(item)
@@ -131,7 +131,7 @@ function Inicio(){
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
       .then(item => {
-          listarPublicaciones()
+          listarPublicacionesAmigos(localStorage.getItem('id'))
           .then(item => {
               console.log("publicaciones ",item)
               setPublicaciones(item)
