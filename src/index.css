@@ -489,3 +489,10 @@ body{
   margin-bottom: 15px;
   font-weight: 700;
 }
+
+.amigo-nombre{
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  padding: 5px;
+}

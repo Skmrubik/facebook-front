@@ -194,7 +194,7 @@ const Perfil = () => {
                     return(
                       <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
                         <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
-                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                        <div className="amigo-nombre">{amigo.idUsuario2.nombre}</div>
                       </div>
                     )
                   })}
@@ -204,7 +204,7 @@ const Perfil = () => {
                     return(
                       <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
                         <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
-                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                        <div className="amigo-nombre">{amigo.idUsuario2.nombre}</div>
                       </div>
                     )
                   })}

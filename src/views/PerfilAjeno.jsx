@@ -33,6 +33,8 @@ const PerfilAjeno = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    setMostrarBotonEnvioAmistad(false);
+    setMostrarBotonAmistad(false);
     getUsuario(id)
     .then(item => {
         console.log("Usuario ", item)
@@ -88,6 +90,8 @@ const PerfilAjeno = () => {
   },[])
 
   useEffect(()=>{
+    setMostrarBotonEnvioAmistad(false);
+    setMostrarBotonAmistad(false);
     getUsuario(id)
     .then(item => {
         console.log("Usuario ", item)
@@ -319,7 +323,7 @@ const PerfilAjeno = () => {
                     return(
                       <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
                         <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
-                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                        <div className="amigo-nombre">{amigo.idUsuario2.nombre}</div>
                       </div>
                     )
                   })}
@@ -329,7 +333,7 @@ const PerfilAjeno = () => {
                     return(
                       <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
                         <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
-                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                        <div className="amigo-nombre">{amigo.idUsuario2.nombre}</div>
                       </div>
                     )
                   })}
