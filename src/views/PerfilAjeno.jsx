@@ -11,7 +11,7 @@ import { borrarPublicacion } from '../api/publicacion';
 import Publicacion from '../components/Publicacion';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { enviarNotificacion } from '../api/publicacion';
-import { solicitudAmistad } from '../api/usuario';
+import { solicitudAmistad, buscarAmigo } from '../api/usuario';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -24,6 +24,7 @@ const PerfilAjeno = () => {
   const [textoPublicacion, setTextoPublicacion] = useState("");
   const [file, setFile] = useState(null);
   const [nameFile, setNameFile] = useState("");
+  const [mostrarBotonAmistad, setMostrarBotonAmistad] = useState(false);
 
   useEffect(()=>{
     getUsuario(id)
@@ -45,13 +46,23 @@ const PerfilAjeno = () => {
         console.log(err.message);
     });
     listarPublicacionesUsuario(id)
-        .then(item => {
-            console.log("publicaciones ",item)
-            setPublicaciones(item)
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+    .then(item => {
+        console.log("publicaciones ",item)
+        setPublicaciones(item)
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+    buscarAmigo(localStorage.getItem('id'),id)
+    .then(item => {
+      console.log("AMistad " , item);
+      if (!item){
+        setMostrarBotonAmistad(true);
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   },[])
 
   useEffect(()=>{
@@ -81,6 +92,16 @@ const PerfilAjeno = () => {
         .catch((err) => {
             console.log(err.message);
         });
+    buscarAmigo(localStorage.getItem('id'),id)
+    .then(item => {
+      console.log("AMistad " , item);
+      if (!item){
+        setMostrarBotonAmistad(true);
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   },[id])
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
@@ -239,9 +260,10 @@ const PerfilAjeno = () => {
               <div className='perfil-header-lugar'>{usuarioAjeno.lugar}</div>
             </div>
           </div>
+          {mostrarBotonAmistad &&
           <button className='aniadir-amigo' onClick={solicitudAmist}>
             <AiOutlineUserAdd size="20px" /><div>Añadir amigo</div>
-          </button>
+          </button>}
         </div>}
         <div className='perfil-contenido'>
           {contenido == 0 && 
