@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUsuario, listSolicitudesAmistad } from '../api/usuario';
 import { useNavigate } from 'react-router-dom';
+import { aceptarSolicitud } from '../api/usuario';
 
 const Solicitudes = () => {
   const [solicitudes, setSolicitudes] = useState(null);
@@ -28,6 +29,25 @@ const Solicitudes = () => {
       navigate("/Perfil")
     }
   }
+
+  function aceptarSoli(solicitud){
+    const id = solicitud.idAmigos;
+    aceptarSolicitud(id)
+    .then(item => {
+        console.log("Aceptada ", item)
+        listSolicitudesAmistad(localStorage.getItem('id'))
+        .then(item => {
+            console.log("SOlicitudoes ", item)
+            setSolicitudes(item);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+  }
   return (
     <div className='solicitudes-container'>
       <div className='solicitudes-container-izq'></div>
@@ -41,7 +61,7 @@ const Solicitudes = () => {
                   <div>&nbsp;quiere ser tu amigo.</div>
                 </div>
                 <div>
-                  <button className='button-aceptar-solicitud'>Aceptar solicitud</button>
+                  <button className='button-aceptar-solicitud' onClick={()=> aceptarSoli(solicitud)}>Aceptar solicitud</button>
                 </div>
               </div>
             )

@@ -48,6 +48,18 @@ export function solicitudAmistad(usuario1, usuario2) {
     .then((response) => response.json())
 }
 
+export function aceptarSolicitud(idAmigos) {
+    return fetch('http://localhost:8080/aceptarSolicitud?id='+idAmigos,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+    )
+    .then((response) => response.json())
+}
+
 export function listSolicitudesAmistad(idUsuario) {
     return fetch('http://localhost:8080/getSolicitudes?id='+idUsuario)
         .then((response) => response.json())
