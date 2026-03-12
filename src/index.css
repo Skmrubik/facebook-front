@@ -466,3 +466,26 @@ body{
   border-radius: 10px;
   cursor: pointer;
 }
+
+.amigo{
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img-amigo{
+  max-width: 90%;
+  border-radius: 5px;
+  aspect-ratio: 1 / 1; /* Esto obliga a que el alto sea igual al ancho */
+  object-fit: cover;
+}
+
+.amigos-title{
+  font-size: 20px;
+  color: white;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}

@@ -8,6 +8,8 @@ import { guardarPathFoto } from '../api/fotos';
 import { GoTrash } from "react-icons/go";
 import { borrarPublicacion } from '../api/publicacion';
 import Publicacion from '../components/Publicacion';
+import { useNavigate } from 'react-router-dom';
+import { getAmigos } from '../api/usuario';
 
 const Perfil = () => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -17,6 +19,8 @@ const Perfil = () => {
   const [textoPublicacion, setTextoPublicacion] = useState("");
   const [file, setFile] = useState(null);
   const [nameFile, setNameFile] = useState("");
+  const [amigos, setAmigos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getUsuario(localStorage.getItem('id'))
@@ -29,13 +33,21 @@ const Perfil = () => {
         console.log(err.message);
     });
     listarPublicacionesUsuario(localStorage.getItem('id'))
-        .then(item => {
-            console.log("publicaciones ",item)
-            setPublicaciones(item)
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+    .then(item => {
+        console.log("publicaciones ",item)
+        setPublicaciones(item)
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+    getAmigos(localStorage.getItem('id'))
+    .then(item => {
+        console.log("amigos ",item)
+        setAmigos(item)
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
   },[])
 
   function borrarPub(idPublicacion){
@@ -160,7 +172,9 @@ const Perfil = () => {
   }
   return (
     <div className='perfil-container'>
-      <div className='perfil-container-izq'></div>
+      <div className='perfil-container-izq'>
+        
+      </div>
       <div className='perfil-container-cen'>
         {usuario && <div className='perfil-header'>
           <img src={imageUrl} style={{ width: '120px', height: '120px', marginRight: 15, borderRadius: '50%' }}></img>
@@ -173,6 +187,29 @@ const Perfil = () => {
           {contenido == 0 && 
           <div className='perfil-contenido-publicaciones'>
             <div className='container-fotos-amigos'>
+              <div>
+                <div className='amigos-title'>Amigos</div>
+                <div style={{display: 'flex', marginTop: 10}}> 
+                  {amigos && amigos.slice(0,3).map((amigo)=>{
+                    return(
+                      <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
+                        <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
+                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div style={{display: 'flex', marginTop: 10}}> 
+                  {amigos && amigos.slice(3,6).map((amigo)=>{
+                    return(
+                      <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
+                        <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
+                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
             <div className='container-publicaciones-usuario'>
               {usuario !=null && <div className='crear-publicacion'>

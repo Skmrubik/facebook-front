@@ -13,6 +13,8 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { enviarNotificacion } from '../api/publicacion';
 import { solicitudAmistad, buscarAmigo } from '../api/usuario';
 import { buscarEnvioAmistad } from '../api/usuario';
+import { useNavigate } from 'react-router-dom';
+import { getAmigos } from '../api/usuario';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -27,6 +29,8 @@ const PerfilAjeno = () => {
   const [nameFile, setNameFile] = useState("");
   const [mostrarBotonAmistad, setMostrarBotonAmistad] = useState(false);
   const [mostrarBotonEnvioAmistad, setMostrarBotonEnvioAmistad] = useState(false);
+  const [amigos, setAmigos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getUsuario(id)
@@ -72,6 +76,14 @@ const PerfilAjeno = () => {
     })
     .catch((err) => {
       console.log(err.message);
+    });
+    getAmigos(id)
+    .then(item => {
+        console.log("amigos ",item)
+        setAmigos(item)
+    })
+    .catch((err) => {
+        console.log(err.message);
     });
   },[])
 
@@ -119,6 +131,14 @@ const PerfilAjeno = () => {
     })
     .catch((err) => {
       console.log(err.message);
+    });
+    getAmigos(id)
+    .then(item => {
+        console.log("amigos ",item)
+        setAmigos(item)
+    })
+    .catch((err) => {
+        console.log(err.message);
     });
   },[id])
   function borrarPub(idPublicacion){
@@ -292,6 +312,29 @@ const PerfilAjeno = () => {
           {contenido == 0 && 
           <div className='perfil-contenido-publicaciones'>
             <div className='container-fotos-amigos'>
+              <div>
+                <div className='amigos-title'>Amigos</div>
+                <div style={{display: 'flex', marginTop: 10}}> 
+                  {amigos && amigos.slice(0,3).map((amigo)=>{
+                    return(
+                      <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
+                        <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
+                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div style={{display: 'flex', marginTop: 10}}> 
+                  {amigos && amigos.slice(3,6).map((amigo)=>{
+                    return(
+                      <div className='amigo' onClick={() => irPerfilUsuario(amigo.idUsuario2.idUsuario)}>
+                        <img className="img-amigo" src={`http://localhost:8080/imagenes/${amigo.idUsuario2.pathFotoPerfil}`}></img>
+                        <div style={{textAlign: 'center', color: 'white', fontWeight: '600'}}>{amigo.idUsuario2.nombre}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
             <div className='container-publicaciones-usuario'>
               {usuario !=null && <div className='crear-publicacion'>
