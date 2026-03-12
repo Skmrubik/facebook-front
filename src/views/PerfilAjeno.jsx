@@ -12,6 +12,7 @@ import Publicacion from '../components/Publicacion';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { enviarNotificacion } from '../api/publicacion';
 import { solicitudAmistad, buscarAmigo } from '../api/usuario';
+import { buscarEnvioAmistad } from '../api/usuario';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -25,6 +26,7 @@ const PerfilAjeno = () => {
   const [file, setFile] = useState(null);
   const [nameFile, setNameFile] = useState("");
   const [mostrarBotonAmistad, setMostrarBotonAmistad] = useState(false);
+  const [mostrarBotonEnvioAmistad, setMostrarBotonEnvioAmistad] = useState(false);
 
   useEffect(()=>{
     getUsuario(id)
@@ -57,7 +59,15 @@ const PerfilAjeno = () => {
     .then(item => {
       console.log("AMistad " , item);
       if (!item){
-        setMostrarBotonAmistad(true);
+        buscarEnvioAmistad(id,localStorage.getItem('id'))
+        .then(item => {
+          console.log("envio" , item);
+          if (item){
+            setMostrarBotonEnvioAmistad(true);
+          } else {
+            setMostrarBotonAmistad(true);
+          }
+        })
       }
     })
     .catch((err) => {
@@ -96,7 +106,15 @@ const PerfilAjeno = () => {
     .then(item => {
       console.log("AMistad " , item);
       if (!item){
-        setMostrarBotonAmistad(true);
+        buscarEnvioAmistad(id,localStorage.getItem('id'))
+        .then(item => {
+          console.log("envio" , item);
+          if (item){
+            setMostrarBotonEnvioAmistad(true);
+          } else {
+            setMostrarBotonAmistad(true);
+          }
+        })
       }
     })
     .catch((err) => {
@@ -245,7 +263,8 @@ const PerfilAjeno = () => {
     .catch((err) => {
         console.log(err.message);
     });
-    
+    setMostrarBotonEnvioAmistad(true);
+    setMostrarBotonAmistad(false);
   }
   
   return (
@@ -263,6 +282,10 @@ const PerfilAjeno = () => {
           {mostrarBotonAmistad &&
           <button className='aniadir-amigo' onClick={solicitudAmist}>
             <AiOutlineUserAdd size="20px" /><div>Añadir amigo</div>
+          </button>}
+          {mostrarBotonEnvioAmistad &&
+          <button className='solicitud-enviada' onClick={solicitudAmist}>
+            <AiOutlineUserAdd size="20px" /><div>Solicitud enviada</div>
           </button>}
         </div>}
         <div className='perfil-contenido'>

@@ -69,3 +69,8 @@ export function buscarAmigo(idUsuario1, idUsuario2) {
     return fetch('http://localhost:8080/buscarAmigo?id1='+idUsuario1+'&id2='+idUsuario2)
         .then((response) => response.json())
 }
+buscarEnvioAmistad
+export function buscarEnvioAmistad(idUsuario1, idUsuario2) {
+    return fetch('http://localhost:8080/buscarEnvioAmistad?id1='+idUsuario1+'&id2='+idUsuario2)
+        .then((response) => response.json())
+}

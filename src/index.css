@@ -414,7 +414,16 @@ body{
   border-radius: 10px;
   cursor: pointer;
 }
-
+.solicitud-enviada{
+  display: flex;
+  padding: 10px;
+  font-size: 15px;
+  color: black;
+  background-color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 10px;
+}
 .solicitudes-container{
   display: flex;
   flex-direction: row;
