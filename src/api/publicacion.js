@@ -32,6 +32,18 @@ export function publicarInicio(publicacion) {
     .then((response) => response.json())
 }
 
+export function publicarPerfil(publicacion) {
+    return fetch('http://localhost:8080/publicarPerfil',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(publicacion)
+        }
+    )
+    .then((response) => response.json())
+}
 export function meGustaPublicacion(idUsuario, idPublicacion) {
     return fetch('http://localhost:8080/meGustaPublicacion?idUser='+idUsuario+'&idPub='+idPublicacion,
         {

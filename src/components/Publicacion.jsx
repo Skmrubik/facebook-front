@@ -9,6 +9,7 @@ import { borrarMegusta } from "../api/publicacion";
 import { useNavigate } from 'react-router-dom';
 import { enviarNotificacion } from "../api/publicacion";
 import { getUsuario } from "../api/usuario";
+import { AiFillCaretRight } from "react-icons/ai";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
@@ -38,6 +39,7 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         .catch((err) => {
             console.log(err.message);
         }); 
+        console.log("Publicacion usuario", publicacion.idUsuario2)
     },[])
 
     function meGusta(){
@@ -101,15 +103,41 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
     return (
         <div className='publicacion' key={key}>
           <div className='publicacion-header'>
-            <div className='publicacion-img-nombre'>
-                <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
-                    <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
-                        style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
-                    <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
-                </div>
-              <div className="publicacion-fecha" onClick={() => irAPublicacion(publicacion.idPublicacion)}>
-                {publicacion.fecha?.substring(0,10)+' '+publicacion.fecha?.substring(11,16)}</div>
-            </div>
+            {publicacion.idUsuario2!= null ?(
+                <div className='publicacion-header-dos'>
+                    <div className='publicacion-img-nombre'>
+                    <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(publicacion.idUsuario2.idUsuario)}>
+                        <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario2.pathFotoPerfil}`} 
+                            style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
+                        <div className='publicacion-nombre-uno'>{publicacion.idUsuario2.nombre}</div>
+                    </div>
+                    <div className="publicacion-fecha" onClick={() => irAPublicacion(publicacion.idPublicacion)}>
+                        {publicacion.fecha?.substring(0,10)}</div>
+                    </div>
+                    <AiFillCaretRight size="15px" className="icono-flecha-publicacion"/>
+                    <div className='publicacion-img-nombre'>
+                    <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
+                        <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
+                            style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
+                        <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+                    </div>
+                    <div className="publicacion-fecha" onClick={() => irAPublicacion(publicacion.idPublicacion)}>
+                        {publicacion.fecha?.substring(0,10)}</div>
+                    </div>
+                </div>)
+            :
+                (<div className='publicacion-header'>
+                    <div className='publicacion-img-nombre'>
+                    <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(publicacion.idUsuario1.idUsuario)}>
+                        <img src={`http://localhost:8080/imagenes/${publicacion.idUsuario1.pathFotoPerfil}`} 
+                            style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
+                        <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
+                    </div>
+                    <div className="publicacion-fecha" onClick={() => irAPublicacion(publicacion.idPublicacion)}>
+                        {publicacion.fecha?.substring(0,10)}</div>
+                    </div>
+                </div>)
+            }
             <div>
               { localStorage.getItem('id') == publicacion.idUsuario1.idUsuario && 
               <GoTrash size="25px" className='icono-eliminar-publicacion' onClick={()=> borrarPub(publicacion.idPublicacion)}/>}

@@ -15,6 +15,7 @@ import { solicitudAmistad, buscarAmigo } from '../api/usuario';
 import { buscarEnvioAmistad } from '../api/usuario';
 import { useNavigate } from 'react-router-dom';
 import { getAmigos } from '../api/usuario';
+import { publicarPerfil } from '../api/publicacion';
 
 const PerfilAjeno = () => {
   const { id } = useParams();
@@ -193,11 +194,12 @@ const PerfilAjeno = () => {
             .then(item => {
               console.log("Subido")
               const publicacion = {
-                idUsuario : localStorage.getItem('id'),
+                idUsuario1 : id,
+                idUsuario2 : localStorage.getItem("id"),
                 texto: textoPublicacion,
                 idFoto: item
               }
-              publicarInicio(publicacion)
+              publicarPerfil(publicacion)
               .then(item => {
                   console.log("publicacion ",item)
                   setTextoPublicacion("");
@@ -226,11 +228,12 @@ const PerfilAjeno = () => {
         });
       } else {
         const publicacion ={
-          idUsuario : localStorage.getItem('id'),
+          idUsuario1 : id,
+          idUsuario2 : localStorage.getItem("id"),
           texto: textoPublicacion,
           idFoto: null,
         }
-        publicarInicio(publicacion)
+        publicarPerfil(publicacion)
         .then(item => {
             console.log("publicacion ",item)
             setTextoPublicacion("");

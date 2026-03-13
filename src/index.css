@@ -182,6 +182,9 @@ body{
   justify-content: space-between;
 }
 
+.publicacion-header-dos{
+  display: flex;
+}
 .publicacion{
   color: white;
   background-color: #737373;
@@ -526,3 +529,6 @@ body{
   width: 100%;
 }
 
+.icono-flecha-publicacion{
+  margin-top: 5px;
+}
