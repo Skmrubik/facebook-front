@@ -170,13 +170,17 @@ const Perfil = () => {
       navigate("/Perfil")
     }
   }
+
+  function irAmigos(){
+    navigate("/Amigos")
+  }
   return (
     <div className='perfil-container'>
       <div className='perfil-container-izq'>
         
       </div>
       <div className='perfil-container-cen'>
-        {usuario && <div className='perfil-header'>
+        {usuario && <div className='perfil-header-propio'>
           <img src={imageUrl} style={{ width: '120px', height: '120px', marginRight: 15, borderRadius: '50%' }}></img>
           <div>
             <div className='perfil-header-nombre'>{usuario.nombre}</div>
@@ -188,7 +192,10 @@ const Perfil = () => {
           <div className='perfil-contenido-publicaciones'>
             <div className='container-fotos-amigos'>
               <div>
-                <div className='amigos-title'>Amigos</div>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div className='amigos-title'>Amigos</div>
+                  <div className='amigos-ver-todos' onClick={irAmigos}> Ver todos</div>
+                </div>    
                 <div style={{display: 'flex', marginTop: 10}}> 
                   {amigos && amigos.slice(0,3).map((amigo)=>{
                     return(

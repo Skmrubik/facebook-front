@@ -298,6 +298,11 @@ body{
   align-items: center;
   justify-content: space-between;
 }
+.perfil-header-propio{
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
 .perfil-header-nombre{
   color: white;
   font-size: 25px;
@@ -458,6 +463,11 @@ body{
   padding: 20px;
 }
 
+.amigo-container{
+  background-color: #595959;
+  border-radius: 10px;
+}
+
 .button-aceptar-solicitud{
   background-color: white;
   padding: 10px;
@@ -482,6 +492,13 @@ body{
   object-fit: cover;
 }
 
+.img-amigo-amigos{
+  max-width: 60px;
+  border-radius: 5px;
+  aspect-ratio: 1 / 1; /* Esto obliga a que el alto sea igual al ancho */
+  object-fit: cover;
+  padding: 10px;
+}
 .amigos-title{
   font-size: 20px;
   color: white;
@@ -496,3 +513,16 @@ body{
   font-weight: 600;
   padding: 5px;
 }
+
+.amigos-ver-todos{
+  color:#1a75ff;
+  font-size: 15px;
+  margin-top: 7px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.amigos-fila{
+  display: flex;
+  width: 100%;
+}
+
