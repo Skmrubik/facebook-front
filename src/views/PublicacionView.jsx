@@ -98,7 +98,7 @@ const PublicacionView = () => {
                         style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
                     <div className='publicacion-nombre-uno'>{publicacion.idUsuario1.nombre}</div>
                 </div>
-              <div className="publicacion-fecha">{publicacion.fecha?.substring(0,10)+' '+publicacion.fecha?.substring(11,16)}</div>
+              <div className="publicacion-fecha">{publicacion.fecha?.substring(0,10)}</div>
             </div>
             <div>
             </div>

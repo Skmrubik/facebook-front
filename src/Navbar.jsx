@@ -128,7 +128,7 @@ function Navbar({idUser, onLogin}) {
         color: 'white',
         cursor: 'pointer',
         width: '200px',
-        '&:active': { backgroundColor: 'grey' }
+        '&:active': { backgroundColor: 'white' }
       }),
 
       // El menú (la caja que envuelve las opciones)

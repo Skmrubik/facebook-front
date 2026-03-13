@@ -237,7 +237,7 @@ const Perfil = () => {
               {publicaciones &&
                 publicaciones.map((publicacion,index)=> {
                   return(
-                    <Publicacion publicacion={publicacion}  irPerfilUsuario={irPerfilUsuario} borrarPub={borrarPub} />
+                    <Publicacion publicacion={publicacion} key={publicacion.idPublicacion} irPerfilUsuario={irPerfilUsuario} borrarPub={borrarPub} />
                   )
                 })
               }
