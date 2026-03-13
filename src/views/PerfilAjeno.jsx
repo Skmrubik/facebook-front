@@ -291,6 +291,9 @@ const PerfilAjeno = () => {
     setMostrarBotonAmistad(false);
   }
   
+  function irAmigos(){
+    navigate("/Amigos/"+id);
+  }
   return (
     <div className='perfil-container'>
       <div className='perfil-container-izq'></div>
@@ -317,7 +320,10 @@ const PerfilAjeno = () => {
           <div className='perfil-contenido-publicaciones'>
             <div className='container-fotos-amigos'>
               <div>
-                <div className='amigos-title'>Amigos</div>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div className='amigos-title'>Amigos</div>
+                  <div className='amigos-ver-todos' onClick={irAmigos}> Ver todos</div>
+                </div> 
                 <div style={{display: 'flex', marginTop: 10}}> 
                   {amigos && amigos.slice(0,3).map((amigo)=>{
                     return(

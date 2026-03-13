@@ -9,6 +9,7 @@ import { getPathFoto } from './api/usuario';
 import PublicacionView from './views/PublicacionView';
 import Solicitudes from './views/Solicitudes';
 import Amigos from './views/Amigos';
+import AmigosAjenos from './views/AmigosAjenos';
 //import Dashboard from './pages/Dashboard';
 
 function App() {
@@ -63,6 +64,10 @@ function App() {
         <Route 
           path="/Amigos" 
           element={<Amigos />} 
+        />
+        <Route 
+          path="/Amigos/:id" 
+          element={<AmigosAjenos />} 
         />
         <Route 
           path="*" 
