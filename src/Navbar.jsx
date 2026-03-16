@@ -185,6 +185,7 @@ function Navbar({idUser, onLogin}) {
                 <div style={{marginTop: 5}}><Link to="/Inicio"><CgHome size="30px" className='icono-casa'/></Link></div>
             </div>
             <div className='contenedor-button-perfil'>
+                <div style={{width: 100}}></div>
                 <div style={{color: 'white'}} className="button-notificaciones" onClick={setDesplegableNotificaciones}>
                     <div className='circulo-notificaciones'>
                         <AiFillBell size="30px"/>
