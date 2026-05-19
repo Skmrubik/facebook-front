@@ -532,3 +532,34 @@ body{
 .icono-flecha-publicacion{
   margin-top: 5px;
 }
+
+.div-comentario{
+  background-color: #333333;
+  margin: auto;
+  border-radius: 10px;
+  z-index: 1;
+  width: 90%;
+  position: relative;
+  bottom: 40px;
+  padding: inherit;
+}
+
+.div-input-comentario{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 99%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #4d4d4d;
+}
+
+p {
+  margin: 0;
+}
+
+.button-enviar{
+  padding: 0px;
+  border: none;
+  background-color: #333333;
+  cursor: pointer;
+}

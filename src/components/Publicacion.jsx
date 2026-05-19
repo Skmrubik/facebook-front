@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { enviarNotificacion } from "../api/publicacion";
 import { getUsuario } from "../api/usuario";
 import { AiFillCaretRight } from "react-icons/ai";
+import { AiOutlineSend } from "react-icons/ai";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
     const [meGustas,setMeGustas] = useState(null);
     const [meGustaPropio, setMeGustaPropio] = useState(false);
     const [usuario, setUsuario] = useState(null);
+    const [divComentarModal,setDivComentarModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(()=> {
@@ -29,7 +31,6 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         listarMeGustasPublicacion(publicacion.idPublicacion)
         .then(item => {
             setMeGustas(item);
-            console.log(publicacion.idPublicacion," get Me gusta ",item)
             item.map((publicacion)=>{
                 if(publicacion.idUsuario.idUsuario == localStorage.getItem('id')){
                     setMeGustaPropio(true);
@@ -164,10 +165,19 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
                 <AiOutlineLike size="25px" className="icono-megusta"/>
                 <p style={{margin: 0, marginLeft: 5}}>Me gusta</p>
             </div>}
-            <div>
+            <div onClick={() => setDivComentarModal(true)}>
               Comentar
             </div>
           </div>
+          {divComentarModal &&
+            <div className="div-comentario">
+                <textarea className="div-input-comentario" maxLength={200} size={200} style={{ resize: 'none' }}>
+                </textarea>
+                <div style={{display: 'flex', justifyContent: 'end'}}>
+                    <button className="button-enviar"><AiOutlineSend style={{backgroundColor: '333333'}} size={20}/></button>
+                </div>  
+            </div>
+          }
         </div>
                   
     );

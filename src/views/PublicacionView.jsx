@@ -19,7 +19,6 @@ const PublicacionView = () => {
         listarMeGustasPublicacion(item.idPublicacion)
         .then(item => {
             setMeGustas(item);
-            console.log(item.idPublicacion," get Me gusta ",item)
             item.map((publicacion)=>{
                 if(publicacion.idUsuario.idUsuario == localStorage.getItem('id')){
                     setMeGustaPropio(true);
