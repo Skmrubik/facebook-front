@@ -11,6 +11,7 @@ import { enviarNotificacion } from "../api/publicacion";
 import { getUsuario } from "../api/usuario";
 import { AiFillCaretRight } from "react-icons/ai";
 import { AiOutlineSend } from "react-icons/ai";
+import { comentarPublicacion } from "../api/publicacion";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
@@ -18,6 +19,7 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
     const [meGustaPropio, setMeGustaPropio] = useState(false);
     const [usuario, setUsuario] = useState(null);
     const [divComentarModal,setDivComentarModal] = useState(false);
+    const [textoPublicacion, setTextoPublicacion] = useState("");
     const navigate = useNavigate();
 
     useEffect(()=> {
@@ -101,6 +103,28 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
     function irAPublicacion(idPub){
         navigate("/Publicacion/"+idPub)
     }
+
+    function publicarComentario(){
+        const comentario = {
+            idPublicacion: publicacion.idPublicacion,
+	        idUsuario: localStorage.getItem('id'),
+	        descripcion: textoPublicacion,
+	        fecha: new Date().toISOString()
+        }
+        comentarPublicacion(comentario)
+        .then(item => {
+            console.log("Comentario ", item);
+            setDivComentarModal(false);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+    }
+
+    const inputAreaTexto = (e) => {
+        setTextoPublicacion(e.target.value)
+    }
+
     return (
         <div className='publicacion' key={key}>
           <div className='publicacion-header'>
@@ -165,16 +189,16 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
                 <AiOutlineLike size="25px" className="icono-megusta"/>
                 <p style={{margin: 0, marginLeft: 5}}>Me gusta</p>
             </div>}
-            <div onClick={() => setDivComentarModal(true)}>
+            <div style={{cursor: "pointer"}} onClick={() => setDivComentarModal(true)}>
               Comentar
             </div>
           </div>
           {divComentarModal &&
             <div className="div-comentario">
-                <textarea className="div-input-comentario" maxLength={200} size={200} style={{ resize: 'none' }}>
+                <textarea className="div-input-comentario" value={textoPublicacion} onChange={inputAreaTexto} maxLength={200} size={200} style={{ resize: 'none' }}>
                 </textarea>
                 <div style={{display: 'flex', justifyContent: 'end'}}>
-                    <button className="button-enviar"><AiOutlineSend style={{backgroundColor: '333333'}} size={20}/></button>
+                    <button className="button-enviar" onClick={publicarComentario}><AiOutlineSend style={{backgroundColor: '333333'}} size={20}/></button>
                 </div>  
             </div>
           }

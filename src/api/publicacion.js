@@ -110,3 +110,16 @@ export function marcarComoLeido(idNot) {
     )
         .then((response) => response.json())
 }
+
+export function comentarPublicacion(comentario) {
+    return fetch('http://localhost:8080/publicacionComentario',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(comentario)
+        }
+    )
+    .then((response) => response.json())
+} 
