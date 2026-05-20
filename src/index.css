@@ -542,6 +542,7 @@ body{
   position: relative;
   bottom: 25px;
   padding: inherit;
+  border: black 2px solid;
 }
 
 .div-input-comentario{
@@ -562,4 +563,11 @@ p {
   border: none;
   background-color: #333333;
   cursor: pointer;
+}
+
+.comentario {
+  background-color: #4d4d4d;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 10px
 }

@@ -123,3 +123,8 @@ export function comentarPublicacion(comentario) {
     )
     .then((response) => response.json())
 } 
+
+export function listComentariosPublicacion(idPub) {
+    return fetch('http://localhost:8080/listComentariosPublicacion?idPub='+idPub)
+        .then((response) => response.json())
+}

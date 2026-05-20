@@ -1,5 +1,5 @@
 import { AiOutlineLike } from "react-icons/ai";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { GoTrash } from "react-icons/go";
 import { meGustaPublicacion } from "../api/publicacion";
 import { AiFillLike } from "react-icons/ai";
@@ -11,7 +11,8 @@ import { enviarNotificacion } from "../api/publicacion";
 import { getUsuario } from "../api/usuario";
 import { AiFillCaretRight } from "react-icons/ai";
 import { AiOutlineSend } from "react-icons/ai";
-import { comentarPublicacion } from "../api/publicacion";
+import { useOutsideClick } from '../hook/useOutsideClick'
+import { comentarPublicacion, listComentariosPublicacion } from "../api/publicacion";
 
 function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
 
@@ -20,7 +21,11 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
     const [usuario, setUsuario] = useState(null);
     const [divComentarModal,setDivComentarModal] = useState(false);
     const [textoPublicacion, setTextoPublicacion] = useState("");
+    const [comentarios, setComentarios]= useState(null);
+    const containerRef = useRef(null);
     const navigate = useNavigate();
+
+    useOutsideClick(containerRef, () => setDivComentarModal(false));
 
     useEffect(()=> {
         getUsuario(localStorage.getItem('id'))
@@ -42,6 +47,13 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         .catch((err) => {
             console.log(err.message);
         }); 
+        listComentariosPublicacion(publicacion.idPublicacion)
+        .then(item => {
+            setComentarios(item);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
         console.log("Publicacion usuario", publicacion.idUsuario2)
     },[])
 
@@ -114,6 +126,14 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         comentarPublicacion(comentario)
         .then(item => {
             console.log("Comentario ", item);
+            listComentariosPublicacion(publicacion.idPublicacion)
+            .then(item => {
+                setComentarios(item);
+                setTextoPublicacion("");
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
             setDivComentarModal(false);
         })
         .catch((err) => {
@@ -192,9 +212,26 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
             <div style={{cursor: "pointer"}} onClick={() => setDivComentarModal(true)}>
               Comentar
             </div>
+            
           </div>
+          <div>
+                {comentarios && 
+                    comentarios.map((comentario) => {
+                        return(
+                            <div className="comentario">
+                                <div style={{display: 'flex'}} onClick={() => irPerfilUsuario(comentario.idUsuario.idUsuario)}>
+                                    <img src={`http://localhost:8080/imagenes/${comentario.idUsuario.pathFotoPerfil}`} 
+                                        style={{ width: '30px', height: '30px', borderRadius: '50%'}}></img>
+                                    <div className='publicacion-nombre-uno'>{comentario.idUsuario.nombre}</div>
+                                </div>
+                                <div>{comentario.descripcion}</div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
           {divComentarModal &&
-            <div className="div-comentario">
+            <div className="div-comentario" ref={containerRef}>
                 <textarea className="div-input-comentario" value={textoPublicacion} onChange={inputAreaTexto} maxLength={200} size={200} style={{ resize: 'none' }}>
                 </textarea>
                 <div style={{display: 'flex', justifyContent: 'end'}}>
