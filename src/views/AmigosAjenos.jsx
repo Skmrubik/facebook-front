@@ -17,7 +17,6 @@ const AmigosAjenos = () => {
   useEffect(()=>{
     getAmigos(id)
         .then(item => {
-            console.log("amigos ",item)
             const filas = [];
             for (let i = 0; i < item.length; i += 2) {
               let fila = []
@@ -28,7 +27,6 @@ const AmigosAjenos = () => {
               
               filas.push(fila);
             }
-            console.log("filas ",filas)
             setAmigos(filas)
         })
         .catch((err) => {

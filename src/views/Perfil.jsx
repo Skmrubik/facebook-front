@@ -25,7 +25,6 @@ const Perfil = () => {
   useEffect(()=>{
     getUsuario(localStorage.getItem('id'))
     .then(item => {
-        console.log("Usuario ", item)
         setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
         setUsuario(item);
     })
@@ -34,7 +33,6 @@ const Perfil = () => {
     });
     listarPublicacionesUsuario(localStorage.getItem('id'))
     .then(item => {
-        console.log("publicaciones ",item)
         setPublicaciones(item)
     })
     .catch((err) => {
@@ -42,7 +40,6 @@ const Perfil = () => {
     });
     getAmigos(localStorage.getItem('id'))
     .then(item => {
-        console.log("amigos ",item)
         setAmigos(item)
     })
     .catch((err) => {
@@ -53,10 +50,8 @@ const Perfil = () => {
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
       .then(item => {
-          console.log("publicacion ",item)
           listarPublicacionesUsuario(localStorage.getItem('id'))
           .then(item => {
-              console.log("publicaciones ",item)
               setPublicaciones(item)
           })
           .catch((err) => {
@@ -104,11 +99,9 @@ const Perfil = () => {
               }
               publicarInicio(publicacion)
               .then(item => {
-                  console.log("publicacion ",item)
                   setTextoPublicacion("");
                   listarPublicacionesUsuario(localStorage.getItem('id'))
                   .then(item => {
-                      console.log("publicaciones ",item)
                       setPublicaciones(item)
                   })
                   .catch((err) => {
@@ -137,11 +130,9 @@ const Perfil = () => {
         }
         publicarInicio(publicacion)
         .then(item => {
-            console.log("publicacion ",item)
             setTextoPublicacion("");
             listarPublicacionesUsuario(localStorage.getItem('id'))
             .then(item => {
-                console.log("publicaciones ",item)
                 setPublicaciones(item)
             })
             .catch((err) => {

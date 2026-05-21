@@ -38,7 +38,6 @@ const PerfilAjeno = () => {
     setMostrarBotonAmistad(false);
     getUsuario(id)
     .then(item => {
-        console.log("Usuario ", item)
         setImageUrlAjeno(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
         setUsuarioAjeno(item);
     })
@@ -47,7 +46,6 @@ const PerfilAjeno = () => {
     });
     getUsuario(localStorage.getItem('id'))
     .then(item => {
-        console.log("Usuario ", item)
         setUsuario(item);
         setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
     })
@@ -56,7 +54,6 @@ const PerfilAjeno = () => {
     });
     listarPublicacionesUsuario(id)
     .then(item => {
-        console.log("publicaciones ",item)
         setPublicaciones(item)
     })
     .catch((err) => {
@@ -64,11 +61,9 @@ const PerfilAjeno = () => {
     });
     buscarAmigo(localStorage.getItem('id'),id)
     .then(item => {
-      console.log("AMistad " , item);
       if (!item){
         buscarEnvioAmistad(id,localStorage.getItem('id'))
         .then(item => {
-          console.log("envio" , item);
           if (item){
             setMostrarBotonEnvioAmistad(true);
           } else {
@@ -82,7 +77,6 @@ const PerfilAjeno = () => {
     });
     getAmigos(id)
     .then(item => {
-        console.log("amigos ",item)
         setAmigos(item)
     })
     .catch((err) => {
@@ -95,7 +89,6 @@ const PerfilAjeno = () => {
     setMostrarBotonAmistad(false);
     getUsuario(id)
     .then(item => {
-        console.log("Usuario ", item)
         setImageUrlAjeno(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
         setUsuarioAjeno(item);
     })
@@ -104,7 +97,6 @@ const PerfilAjeno = () => {
     });
     getUsuario(localStorage.getItem('id'))
     .then(item => {
-        console.log("Usuario ", item)
         setUsuario(item);
         setImageUrl(`http://localhost:8080/imagenes/${item.pathFotoPerfil}`);
     })
@@ -113,7 +105,6 @@ const PerfilAjeno = () => {
     });
     listarPublicacionesUsuario(id)
         .then(item => {
-            console.log("publicaciones ",item)
             setPublicaciones(item)
         })
         .catch((err) => {
@@ -121,11 +112,9 @@ const PerfilAjeno = () => {
         });
     buscarAmigo(localStorage.getItem('id'),id)
     .then(item => {
-      console.log("AMistad " , item);
       if (!item){
         buscarEnvioAmistad(id,localStorage.getItem('id'))
         .then(item => {
-          console.log("envio" , item);
           if (item){
             setMostrarBotonEnvioAmistad(true);
           } else {
@@ -139,7 +128,6 @@ const PerfilAjeno = () => {
     });
     getAmigos(id)
     .then(item => {
-        console.log("amigos ",item)
         setAmigos(item)
     })
     .catch((err) => {
@@ -149,10 +137,8 @@ const PerfilAjeno = () => {
   function borrarPub(idPublicacion){
     borrarPublicacion(idPublicacion)
       .then(item => {
-          console.log("publicacion ",item)
           listarPublicacionesUsuario(id)
           .then(item => {
-              console.log("publicaciones ",item)
               setPublicaciones(item)
           })
           .catch((err) => {
@@ -201,11 +187,9 @@ const PerfilAjeno = () => {
               }
               publicarPerfil(publicacion)
               .then(item => {
-                  console.log("publicacion ",item)
                   setTextoPublicacion("");
                   listarPublicacionesUsuario(localStorage.getItem('id'))
                   .then(item => {
-                      console.log("publicaciones ",item)
                       setPublicaciones(item)
                   })
                   .catch((err) => {
@@ -235,11 +219,9 @@ const PerfilAjeno = () => {
         }
         publicarPerfil(publicacion)
         .then(item => {
-            console.log("publicacion ",item)
             setTextoPublicacion("");
             listarPublicacionesUsuario(id)
             .then(item => {
-                console.log("publicaciones ",item)
                 setPublicaciones(item)
             })
             .catch((err) => {
@@ -278,10 +260,8 @@ const PerfilAjeno = () => {
     }
     solicitudAmistad(usuarioAjeno.idUsuario, usuario.idUsuario)
     .then(item => {
-        console.log("Solicitud ", item);
         enviarNotificacion(notificacion)
         .then(item => {
-            console.log("Notificacion ", item);
         })
         .catch((err) => {
             console.log(err.message);

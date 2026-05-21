@@ -13,7 +13,6 @@ const Solicitudes = () => {
   useEffect(()=>{
     listSolicitudesAmistad(localStorage.getItem('id'))
     .then(item => {
-        console.log("SOlicitudoes ", item)
         setSolicitudes(item);
     })
     .catch((err) => {
@@ -34,10 +33,8 @@ const Solicitudes = () => {
     const id = solicitud.idAmigos;
     aceptarSolicitud(id)
     .then(item => {
-        console.log("Aceptada ", item)
         listSolicitudesAmistad(localStorage.getItem('id'))
         .then(item => {
-            console.log("SOlicitudoes ", item)
             setSolicitudes(item);
         })
         .catch((err) => {

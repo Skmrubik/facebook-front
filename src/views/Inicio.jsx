@@ -58,7 +58,6 @@ function Inicio(){
       formData.append('file', file[0], pathFoto);
       subirFoto(formData)
       .then(item => {
-        console.log(item);
         if (item.status == 'ok') {
           setNameFile("");
           guardarPathFoto(pathFoto)
@@ -74,7 +73,6 @@ function Inicio(){
                 setTextoPublicacion("");
                 listarPublicacionesAmigos(localStorage.getItem('id'))
                 .then(item => {
-                    console.log("publicaciones ",item)
                     setPublicaciones(item)
                 })
                 .catch((err) => {
@@ -107,7 +105,6 @@ function Inicio(){
           setTextoPublicacion("");
           listarPublicacionesAmigos(localStorage.getItem('id'))
           .then(item => {
-              console.log("publicaciones ",item)
               setPublicaciones(item)
           })
           .catch((err) => {
@@ -133,7 +130,6 @@ function Inicio(){
       .then(item => {
           listarPublicacionesAmigos(localStorage.getItem('id'))
           .then(item => {
-              console.log("publicaciones ",item)
               setPublicaciones(item)
           })
           .catch((err) => {

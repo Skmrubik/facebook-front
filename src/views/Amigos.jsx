@@ -15,7 +15,6 @@ const Amigos = () => {
   useEffect(()=>{
     getAmigos(localStorage.getItem('id'))
         .then(item => {
-            console.log("amigos ",item)
             const filas = [];
             for (let i = 0; i < item.length; i += 2) {
               let fila = []
@@ -26,7 +25,6 @@ const Amigos = () => {
               
               filas.push(fila);
             }
-            console.log("filas ",filas)
             setAmigos(filas)
         })
         .catch((err) => {

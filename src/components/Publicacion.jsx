@@ -54,7 +54,6 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         .catch((err) => {
             console.log(err.message);
         });
-        console.log("Publicacion usuario", publicacion.idUsuario2)
     },[])
 
     function meGusta(){
@@ -125,7 +124,6 @@ function Publicacion({publicacion, irPerfilUsuario, borrarPub, key}) {
         }
         comentarPublicacion(comentario)
         .then(item => {
-            console.log("Comentario ", item);
             listComentariosPublicacion(publicacion.idPublicacion)
             .then(item => {
                 setComentarios(item);
