@@ -540,9 +540,9 @@ body{
   z-index: 1;
   width: 90%;
   position: relative;
-  bottom: 25px;
+  bottom: 0px;
   padding: inherit;
-  border: black 2px solid;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
 }
 
 .div-input-comentario{
